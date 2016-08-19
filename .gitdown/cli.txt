@@ -1,0 +1,25 @@
+NAME:
+   smartling - Smartling CLI to `upload` and `download` translations
+
+USAGE:
+   smartling [global options] command [command options] [arguments...]
+
+VERSION:
+   dev
+
+AUTHOR(S):
+   Marat Dreizin <marat.dreizin@gmail.com>
+
+COMMANDS:
+     push     Uploads translations
+     pull     Downloads translations
+     help, h  Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --project-file value   (default: ".smartling.yml") [$SMARTLING_PROJECT_FILE]
+   --project-id value      [$SMARTLING_PROJECT_ID]
+   --project-alias value   [$SMARTLING_PROJECT_ALIAS]
+   --user-id value         [$SMARTLING_USER_ID]
+   --user-secret value     [$SMARTLING_USER_SECRET]
+   --help, -h             show help
+   --version, -v          print the version

@@ -1,0 +1,14 @@
+package: github.com/mdreizin/smartling
+import:
+- package: gopkg.in/yaml.v2
+- package: github.com/imdario/mergo
+- package: github.com/facebookgo/inject
+  subpackages:
+  - '...'
+- package: github.com/google/go-querystring
+  subpackages:
+  - query
+testImport:
+- package: github.com/stretchr/testify
+  subpackages:
+  - assert

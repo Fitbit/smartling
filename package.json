@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "gitdown": "gitdown ./.gitdown/README.md --output-file ./README.md"
+  },
+  "devDependencies": {
+    "gitdown": "^2.4.10"
+  }
+}
