@@ -10,7 +10,7 @@ branches:
 deploy:
   provider: releases
   api_key: "$GH_TOKEN"
-  files:
+  file:
     - 'build/smartling-darwin-386.tar.gz'
     - 'build/smartling-darwin-amd64.tar.gz'
     - 'build/smartling-linux-386.tar.gz'
