@@ -27,4 +27,4 @@ script:
   - make clean
   - make lint
   - make coveralls
-  - make build-all
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then make build-all; fi'
