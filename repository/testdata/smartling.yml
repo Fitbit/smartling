@@ -1,0 +1,13 @@
+UserId: userId
+UserSecret: userSecret
+ProjectId: projectId
+ProjectAlias: projectAlias
+Files:
+- Type: json
+  PathGlob: repository/testdata/*/en-US.json
+  PathExpression: '{{ .Dir }}/{{ .Locale }}{{ .Ext }}'
+  AuthorizeContent: true
+  Directives:
+    string_format: NONE
+Locales:
+  ru-RU: ru

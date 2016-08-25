@@ -1,0 +1,24 @@
+UserId: <SMARTLING_USER_ID>
+UserSecret: <SMARTLING_USER_SECRET>
+ProjectId: <SMARTLING_PROJECT_ID>
+ProjectAlias: <SMARTLING_PROJECT_ALIAS>
+Files:
+- Type: json
+  PathGlob: translations/**/en-US.json
+  PathExclude:
+  - translations/foo/en-US.json
+  PathExpression: '{{ .Dir }}/{{ .Locale }}{{ .Ext }}'
+  AuthorizeContent: true
+  Directives:
+    string_format: NONE
+Locales:
+  de-DE: de-DE
+  es-ES: es-ES
+  fr-FR: fr-FR
+  it-IT: it-IT
+  ja-JP: ja-JP
+  ko-KR: ko-KR
+  pt-BR: pt-BR
+  tr-TR: tr-TR
+  zh-CN: zh-CN
+  zh-TW: zh-TW
