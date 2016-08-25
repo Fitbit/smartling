@@ -1,5 +1,9 @@
 PACKAGES:=$$(go list ./... | grep -v /vendor/)
-VERSION:=$$(git describe --abbrev=0 --tags)
+ifdef TRAVIS_TAG
+	VERSION=$(TRAVIS_TAG)
+else
+	VERSION=dev
+endif
 GOBUILD_ARGS:=-ldflags "-X main.Version=$(VERSION)"
 BIN_NAME:=smartling
 
