@@ -1,5 +1,5 @@
 [![Travis build status](http://img.shields.io/travis/mdreizin/smartling/master.svg?style=flat-square)](https://travis-ci.org/mdreizin/smartling)
-[![Coverage Status](https://img.shields.io/coveralls/mdreizin/smartling/master.svg?style=flat-square)](https://coveralls.io/r/mdreizin/smartling?branch=develop)
+[![Coverage Status](https://img.shields.io/coveralls/mdreizin/smartling/master.svg?style=flat-square)](https://coveralls.io/r/mdreizin/smartling?branch=master)
 
 <h1 id="smartling">smartling</h1>
 > Smartling CLI to `upload` and `download` translations
