@@ -14,7 +14,7 @@ deploy:
     - 'build/smartling-darwin-386.tar.gz'
     - 'build/smartling-darwin-amd64.tar.gz'
     - 'build/smartling-linux-386.tar.gz'
-    - 'build/smartling-linux-darwin-amd64.tar.gz'
+    - 'build/smartling-linux-amd64.tar.gz'
   skip_cleanup: true
   on:
     tags: true
