@@ -94,10 +94,16 @@ func (s *DefaultFileService) Push(params *FilePushParams) (*model.FileStats, err
 					client := resty.R().
 						SetResult(rest.Model{}).
 						SetError(rest.Model{}).
-						SetMultiValueQueryParams(q).
-						SetQueryParams(params.Directives).
 						SetAuthToken(params.AuthToken).
 						SetFileReader("file", "", bytes.NewReader(content))
+
+					for p, v := range q {
+						for _, pv := range v {
+							client.FormData.Add(p, pv)
+						}
+					}
+
+					client.SetFormData(params.Directives)
 
 					if resp, err = client.Post(_url); err == nil {
 						err = rest.Result(resp, &stats)
