@@ -7,7 +7,7 @@ endif
 GOBUILD_ARGS:=-ldflags "-X main.Version=$(VERSION)"
 BIN_NAME:=smartling
 
-.PHONY: clean build build-all install fmt restore lint test bench cover cover-html coveralls readme
+.PHONY: clean build build-all fmt restore lint test bench cover cover-html coveralls readme
 
 clean:
 	@go clean $(PACKAGES)
@@ -17,9 +17,6 @@ clean:
 
 build:
 	@go build -o $$GOPATH/bin/$(BIN_NAME) ./cli/...;
-
-install:
-	@go install $(PACKAGES)
 
 build-all:
 	@for GOOS in darwin linux; do \

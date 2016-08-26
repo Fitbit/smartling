@@ -10,6 +10,7 @@ Supports only Smartling's API v2
 
 - [x] `push` - Uploads translations
 - [x] `pull` - Downloads translations
+- [x] `list` - Displays list of local translations
 
 ## Download
 

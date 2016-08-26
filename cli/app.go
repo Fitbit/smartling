@@ -38,6 +38,7 @@ func newApp() *cli.App {
 	app.Commands = []cli.Command{
 		pushCommand,
 		pullCommand,
+		listCommand,
 	}
 
 	return app
