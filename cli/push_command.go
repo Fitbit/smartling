@@ -11,7 +11,13 @@ var pushCommand = cli.Command{
 	Name:  "push",
 	Usage: "Uploads translations",
 	Before: func(c *cli.Context) error {
-		return invokeActions(globalBeforeActions, c)
+		return invokeActions([]action{
+			ensureMetadataAction,
+			injectContainerAction,
+			injectProjectConfigAction,
+			validateProjectConfigAction,
+			injectAuthTokenAction,
+		}, c)
 	},
 	Action: func(c *cli.Context) error {
 		container := c.App.Metadata[containerMetadataKey].(*service.Container)
@@ -46,6 +52,8 @@ var pushCommand = cli.Command{
 		return nil
 	},
 	After: func(c *cli.Context) error {
-		return invokeActions(globalAfterActions, c)
+		return invokeActions([]action{
+			persistAuthTokenAction,
+		}, c)
 	},
 }

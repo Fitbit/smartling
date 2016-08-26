@@ -10,6 +10,7 @@ Supports only Smartling's API v2
 
 - [x] `push` - Uploads translations
 - [x] `pull` - Downloads translations
+- [x] `list` - Displays list of local translations
 
 <h2 id="smartling-download">Download</h2>
 
@@ -67,9 +68,10 @@ AUTHOR(S):
    Marat Dreizin <marat.dreizin@gmail.com>
 
 COMMANDS:
-     push     Uploads translations
-     pull     Downloads translations
-     help, h  Shows a list of commands or help for one command
+     push      Uploads translations
+     pull      Downloads translations
+     list, ls  Shows a list of local translations
+     help, h   Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
    --project-file value   (default: ".smartling.yml") [$SMARTLING_PROJECT_FILE]
