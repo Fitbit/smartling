@@ -1,5 +1,5 @@
-hash: 134070484bf73dccd883ca2eb96187a86dfd833d0a988a24934929ea55dd29b3
-updated: 2016-08-24T18:51:40.142183658+03:00
+hash: 8a3b9fb85724f31342a91e042d41c1aa1910ab452fdc2dc7b5a9ff6514698303
+updated: 2016-08-26T14:55:36.977038768+03:00
 imports:
 - name: github.com/aokoli/goutils
   version: 9c37978a95bd5c709a15883b6242714ea6709e64
@@ -17,8 +17,10 @@ imports:
   version: 50d4dbd4eb0e84778abe37cefef140271d96fade
 - name: github.com/Masterminds/sprig
   version: 89eb6984259918bffe1ddff9647b9ed06061e688
+- name: github.com/mattn/go-zglob
+  version: 2dbd7f37a45e993d5180a251b4bdd314d6333b70
 - name: golang.org/x/net
-  version: 7394c112eae4dba7e96bfcfe738e6373d61772b4
+  version: 6c89f9617983ee917132513a791d8b5850fe90c5
   subpackages:
   - publicsuffix
 - name: gopkg.in/resty.v0

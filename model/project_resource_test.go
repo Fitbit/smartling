@@ -45,6 +45,12 @@ func TestProjectResource_Files(t *testing.T) {
 			"testdata/bar/en-US.json",
 		},
 	}
+	r4 := ProjectResource{
+		PathGlob: "testdata/**/en-US.json",
+		PathExclude: []string{
+			"testdata/foo/.*",
+		},
+	}
 
 	a.EqualValues([]string{
 		"testdata/bar/en-US.json",
@@ -54,4 +60,7 @@ func TestProjectResource_Files(t *testing.T) {
 		"testdata/bar/en-US.json",
 	}, r2.Files())
 	a.EqualValues([]string{}, r3.Files())
+	a.EqualValues([]string{
+		"testdata/bar/en-US.json",
+	}, r4.Files())
 }

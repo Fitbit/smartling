@@ -3,9 +3,10 @@ package model
 import (
 	"bytes"
 	"github.com/Masterminds/sprig"
+	"github.com/mattn/go-zglob"
 	"html/template"
 	"path"
-	"path/filepath"
+	"regexp"
 )
 
 type ProjectResource struct {
@@ -48,7 +49,7 @@ func (r *ProjectResource) PathFor(filename string, locale string) (string, error
 }
 
 func (r *ProjectResource) Files() []string {
-	allFiles, _ := filepath.Glob(r.PathGlob)
+	allFiles, _ := zglob.Glob(r.PathGlob)
 
 	if len(r.PathExclude) > 0 {
 		files := []string{}
@@ -57,7 +58,7 @@ func (r *ProjectResource) Files() []string {
 			include := false
 
 			for _, pattern := range r.PathExclude {
-				matched, err := filepath.Match(pattern, name)
+				matched, err := regexp.MatchString(pattern, name)
 
 				if matched && err == nil {
 					include = false
