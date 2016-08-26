@@ -6,6 +6,7 @@ else
 endif
 GOBUILD_ARGS:=-ldflags "-X main.Version=$(VERSION)"
 BIN_NAME:=smartling
+DIST_DIRS:=find * -type d -exec
 
 .PHONY: clean build build-all fmt restore lint test bench cover cover-html coveralls readme
 
@@ -19,18 +20,20 @@ build:
 	@go build -o $$GOPATH/bin/$(BIN_NAME) ./cli/...;
 
 build-all:
-	@for GOOS in darwin linux; do \
-		for GOARCH in 386 amd64; do \
-			echo "Building $$GOOS-$$GOARCH..."; \
-			FULL_BIN_NAME=$(BIN_NAME)-$$GOOS-$$GOARCH; \
-			GOOS=$$GOOS GOARCH=$$GOARCH go build $(GOBUILD_ARGS) -o build/$$FULL_BIN_NAME ./cli/...; \
-			cd build; \
-			cp $$FULL_BIN_NAME $(BIN_NAME); \
-			tar -zcf "$$FULL_BIN_NAME.tar.gz" $(BIN_NAME); \
-			rm -rf $(BIN_NAME); \
-			cd ..; \
-		done \
-	done
+	gox \
+	$(GOBUILD_ARGS) \
+	-os="linux darwin windows freebsd openbsd netbsd plan9" \
+	-arch="amd64 386 armv5 armv6 armv7 arm64" \
+	-osarch="!darwin/arm64" \
+	-output="build/{{.OS}}-{{.Arch}}/${BIN_NAME}" ./cli/...
+
+dist:
+	cd build && \
+	$(DIST_DIRS) cp ../LICENSE {} \; && \
+	$(DIST_DIRS) cp ../README.md {} \; && \
+	$(DIST_DIRS) tar -zcf ${BIN_NAME}-${VERSION}-{}.tar.gz {} \; && \
+	$(DIST_DIRS) zip -r ${BIN_NAME}-${VERSION}-{}.zip {} \; && \
+	cd ..
 
 fmt:
 	@go fmt $(PACKAGES)
@@ -41,6 +44,7 @@ restore:
 	@go get -u -v github.com/wadey/gocovmerge
 	@go get -u -v github.com/mattn/goveralls
 	@go get -u -v github.com/golang/lint/golint
+	@go get -u -v github.com/mitchellh/gox
 	@glide install
 
 lint:
