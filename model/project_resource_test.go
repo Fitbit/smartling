@@ -64,3 +64,24 @@ func TestProjectResource_Files(t *testing.T) {
 		"testdata/bar/en-US.json",
 	}, r4.Files())
 }
+
+func TestProjectResource_PartialFiles(t *testing.T) {
+	a := assert.New(t)
+	r := ProjectResource{
+		PathGlob: "testdata/**/en-US.json",
+	}
+
+	f1 := r.PartialFiles(-1)
+	f2 := r.PartialFiles(1)
+	f3 := r.PartialFiles(3)
+
+	a.Len(f1, 1)
+	a.Len(f1[0], 2)
+
+	a.Len(f2, 2)
+	a.Len(f2[0], 1)
+	a.Len(f2[1], 1)
+
+	a.Len(f3, 1)
+	a.Len(f3[0], 2)
+}

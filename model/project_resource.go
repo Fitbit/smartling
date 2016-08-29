@@ -86,3 +86,29 @@ func (r *ProjectResource) Files() []string {
 
 	return allFiles
 }
+
+func (r *ProjectResource) PartialFiles(limit int) [][]string {
+	files := r.Files()
+	partialFiles := [][]string{}
+
+	if limit < 0 || len(files) < limit {
+		partialFiles = append(partialFiles, files)
+	} else if limit > 0 {
+		q := []string{}
+		i := 0
+
+		for _, x := range files {
+			i++
+			q = append(q, x)
+
+			if i == limit {
+				partialFiles = append(partialFiles, q)
+
+				q = []string{}
+				i = 0
+			}
+		}
+	}
+
+	return partialFiles
+}
