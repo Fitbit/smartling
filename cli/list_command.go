@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/mdreizin/smartling/model"
 	"gopkg.in/urfave/cli.v1"
 )
@@ -27,7 +28,7 @@ var listCommand = cli.Command{
 			logInfo(fmt.Sprintf("Using {PathGlob=%v PathExclude=%v}", resource.PathGlob, resource.PathExclude))
 
 			for _, v := range resource.Files() {
-				logInfo(v)
+				logInfo(color.MagentaString(v))
 				i++
 			}
 		}
