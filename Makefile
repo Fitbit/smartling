@@ -22,7 +22,7 @@ build:
 build-all:
 	gox \
 	$(GOBUILD_ARGS) \
-	-os="linux darwin windows freebsd openbsd netbsd plan9" \
+	-os="linux darwin windows freebsd openbsd netbsd" \
 	-arch="amd64 386 armv5 armv6 armv7 arm64" \
 	-osarch="!darwin/arm64" \
 	-output="build/{{.OS}}-{{.Arch}}/${BIN_NAME}" ./cli/...
