@@ -1,5 +1,5 @@
 hash: 9fffa0d211052ccd51d65f7075edebd8d562def61520221845eafad19881bdfd
-updated: 2016-08-29T17:36:39.007447276+03:00
+updated: 2016-08-29T21:44:50.142192289+03:00
 imports:
 - name: github.com/aokoli/goutils
   version: 9c37978a95bd5c709a15883b6242714ea6709e64
@@ -27,8 +27,6 @@ imports:
   version: 66b8e73f3f5cda9f96b69efd03dd3d7fc4a5cdb8
 - name: github.com/mattn/go-zglob
   version: 2dbd7f37a45e993d5180a251b4bdd314d6333b70
-- name: github.com/ttacon/chalk
-  version: 22c06c80ed312dcb6e1cf394f9634aa2c4676e22
 - name: golang.org/x/net
   version: 6250b412798208e6c90b03b7c4f226de5aa299e2
   subpackages:
