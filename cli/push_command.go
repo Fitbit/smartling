@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/mdreizin/smartling/model"
 	"github.com/mdreizin/smartling/service"
 	"gopkg.in/urfave/cli.v1"
@@ -36,7 +37,7 @@ var pushCommand = cli.Command{
 			for _, path := range resource.Files() {
 				wg.Add(1)
 
-				logInfo(fmt.Sprintf("Push %s...", path))
+				logInfo(fmt.Sprintf("Push %s...", color.MagentaString(path)))
 
 				go func(path string, resource model.ProjectResource, directives map[string]string) {
 					defer wg.Done()
@@ -52,10 +53,10 @@ var pushCommand = cli.Command{
 					})
 
 					if err == nil {
-						logInfo(fmt.Sprintf("Pushed %s {Override=%t Strings=%d Words=%d}", path, stats.OverWritten, stats.StringCount, stats.WordCount))
+						logInfo(fmt.Sprintf("Pushed %s {Override=%t Strings=%d Words=%d}", color.MagentaString(path), stats.OverWritten, stats.StringCount, stats.WordCount))
 						i++
 					} else {
-						logError(fmt.Sprintf("Push %s was rejected %v", path, err))
+						logError(fmt.Sprintf("Push %s was rejected %s", path, color.RedString(err.Error())))
 					}
 				}(path, resource, directives)
 			}
