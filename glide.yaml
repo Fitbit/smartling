@@ -10,6 +10,10 @@ import:
   - query
 - package: github.com/mattn/go-zglob
 - package: github.com/Masterminds/sprig
+- package: github.com/fatih/color
+  version: ~1.0.0
+  subpackages:
+  - '...'
 testImport:
 - package: github.com/stretchr/testify
   subpackages:

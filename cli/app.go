@@ -34,6 +34,14 @@ func newApp() *cli.App {
 			Name:   "user-secret",
 			EnvVar: nameFor("user_secret"),
 		},
+		cli.BoolFlag{
+			Name: "no-color",
+		},
+	}
+	app.Before = func(c *cli.Context) error {
+		return invokeActions([]action{
+			disableColorAction,
+		}, c)
 	}
 	app.Commands = []cli.Command{
 		pushCommand,

@@ -1,5 +1,5 @@
-hash: 17c04a042c37d96e334886c4e66c7d1781a4953daf9c9a00fb0dbfc1414162eb
-updated: 2016-08-29T10:36:35.348077043+03:00
+hash: 9fffa0d211052ccd51d65f7075edebd8d562def61520221845eafad19881bdfd
+updated: 2016-08-29T17:36:39.007447276+03:00
 imports:
 - name: github.com/aokoli/goutils
   version: 9c37978a95bd5c709a15883b6242714ea6709e64
@@ -9,6 +9,10 @@ imports:
   - '...'
 - name: github.com/facebookgo/structtag
   version: 217e25fb96916cc60332e399c9aa63f5c422ceed
+- name: github.com/fatih/color
+  version: 87d4004f2ab62d0d255e0a38f1680aa534549fe3
+  subpackages:
+  - '...'
 - name: github.com/google/go-querystring
   version: 9235644dd9e52eeae6fa48efd539fdc351a0af53
   subpackages:
@@ -17,12 +21,22 @@ imports:
   version: 50d4dbd4eb0e84778abe37cefef140271d96fade
 - name: github.com/Masterminds/sprig
   version: 89eb6984259918bffe1ddff9647b9ed06061e688
+- name: github.com/mattn/go-colorable
+  version: ed8eb9e318d7a84ce5915b495b7d35e0cfe7b5a8
+- name: github.com/mattn/go-isatty
+  version: 66b8e73f3f5cda9f96b69efd03dd3d7fc4a5cdb8
 - name: github.com/mattn/go-zglob
   version: 2dbd7f37a45e993d5180a251b4bdd314d6333b70
+- name: github.com/ttacon/chalk
+  version: 22c06c80ed312dcb6e1cf394f9634aa2c4676e22
 - name: golang.org/x/net
   version: 6250b412798208e6c90b03b7c4f226de5aa299e2
   subpackages:
   - publicsuffix
+- name: golang.org/x/sys
+  version: a646d33e2ee3172a661fc09bca23bb4889a41bc8
+  subpackages:
+  - unix
 - name: gopkg.in/resty.v0
   version: 0eed47a8f8c2575a34a067585dc0853d91943ac4
 - name: gopkg.in/urfave/cli.v1

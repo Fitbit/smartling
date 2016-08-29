@@ -1,11 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"github.com/mdreizin/smartling/model"
 	"github.com/mdreizin/smartling/service"
 	"gopkg.in/urfave/cli.v1"
 	"sync"
-	"fmt"
+	"time"
 )
 
 var pushCommand = cli.Command{
@@ -21,9 +22,12 @@ var pushCommand = cli.Command{
 		}, c)
 	},
 	Action: func(c *cli.Context) error {
+		defer elapsedTime("Push", time.Now())
+
 		container := c.App.Metadata[containerMetadataKey].(*service.Container)
 		authToken := c.App.Metadata[authTokenMetadataKey].(*model.AuthToken)
 		projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
+		i := 0
 		wg := &sync.WaitGroup{}
 
 		for _, resource := range projectConfig.Resources {
@@ -32,12 +36,12 @@ var pushCommand = cli.Command{
 			for _, path := range resource.Files() {
 				wg.Add(1)
 
-				fmt.Println(path)
+				logInfo(fmt.Sprintf("Push %s...", path))
 
 				go func(path string, resource model.ProjectResource, directives map[string]string) {
 					defer wg.Done()
 
-					container.FileService.Push(&service.FilePushParams{
+					stats, err := container.FileService.Push(&service.FilePushParams{
 						ProjectID:  projectConfig.Project.ID,
 						FileURI:    projectConfig.FileURI(path),
 						FilePath:   path,
@@ -46,11 +50,20 @@ var pushCommand = cli.Command{
 						Directives: directives,
 						AuthToken:  authToken.AccessToken,
 					})
+
+					if err == nil {
+						logInfo(fmt.Sprintf("Pushed %s {Override=%t Strings=%d Words=%d}", path, stats.OverWritten, stats.StringCount, stats.WordCount))
+						i++
+					} else {
+						logError(fmt.Sprintf("Push %s was rejected %v", path, err))
+					}
 				}(path, resource, directives)
 			}
 		}
 
 		wg.Wait()
+
+		logInfo(fmt.Sprintf("Pushed %d files", i))
 
 		return nil
 	},
