@@ -1,3 +1,4 @@
+SHELL:=/bin/bash
 PACKAGES:=$$(go list ./... | grep -v /vendor/)
 ifdef TRAVIS_TAG
 	VERSION=$(TRAVIS_TAG)
@@ -6,15 +7,15 @@ else
 endif
 GOBUILD_ARGS:=-ldflags "-X main.Version=$(VERSION)"
 BIN_NAME:=smartling
-DIST_DIRS:=find * -type d -exec
+BUILD_DIR:=build
+COVER_DIR:=coverage
 
-.PHONY: clean build build-all fmt restore lint test bench cover cover-html coveralls readme
+.PHONY: clean build build-all dist fmt restore lint test bench cover cover-html coveralls readme
 
 clean:
 	@go clean $(PACKAGES)
-	@- rm -rf dist
-	@- rm -rf coverage
-	@- rm -rf build
+	@- rm -rf ${COVER_DIR}
+	@- rm -rf ${BUILD_DIR}
 
 build:
 	@go build -o $$GOPATH/bin/$(BIN_NAME) ./cli/...;
@@ -25,15 +26,19 @@ build-all:
 	-os="linux darwin windows freebsd openbsd netbsd" \
 	-arch="amd64 386 armv5 armv6 armv7 arm64" \
 	-osarch="!darwin/arm64" \
-	-output="build/{{.OS}}-{{.Arch}}/${BIN_NAME}" ./cli/...
+	-output="${BUILD_DIR}/{{.OS}}-{{.Arch}}/${BIN_NAME}" ./cli/...
 
 dist:
-	cd build && \
-	$(DIST_DIRS) cp ../LICENSE {} \; && \
-	$(DIST_DIRS) cp ../README.md {} \; && \
-	$(DIST_DIRS) tar -zcf ${BIN_NAME}-${VERSION}-{}.tar.gz {} \; && \
-	$(DIST_DIRS) zip -r ${BIN_NAME}-${VERSION}-{}.zip {} \; && \
-	cd ..
+	@for dirname in $$(find ${BUILD_DIR} -mindepth 1 -maxdepth 1 -type d); do \
+		basename=$$(basename $$dirname); \
+		filename=${BIN_NAME}-${VERSION}-$$basename; \
+		cp LICENSE $$dirname; \
+		cp README.md $$dirname; \
+		pushd $$dirname &> /dev/null; \
+		tar -zcf ../$$filename.tar.gz ./; \
+		zip -rq ../$$filename.zip ./; \
+		popd &> /dev/null; \
+	done
 
 fmt:
 	@go fmt $(PACKAGES)
@@ -64,15 +69,15 @@ cover:
 
 cover-html:
 	@- mkdir -p coverage
-	@gocov test $(PACKAGES) | gocov-html > coverage/profile.html
+	@gocov test $(PACKAGES) | gocov-html > ${COVER_DIR}/profile.html
 
 coveralls:
 	@- mkdir -p coverage
 	@for pkg in $(PACKAGES); do \
-		go test $$pkg -coverprofile="coverage/$$(basename $$pkg)-profile.cov"; \
+		go test $$pkg -coverprofile="${COVER_DIR}/$$(basename $$pkg)-profile.cov"; \
 	done
-	@gocovmerge coverage/*-profile.cov > coverage/profile.cov
-	@goveralls -coverprofile=coverage/profile.cov -service=travis-ci
+	@gocovmerge ${COVER_DIR}/*-profile.cov > ${COVER_DIR}/profile.cov
+	@goveralls -coverprofile=${COVER_DIR}/profile.cov -service=travis-ci
 
 readme:
 	@npm run gitdown
