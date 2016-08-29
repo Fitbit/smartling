@@ -21,12 +21,18 @@ var listCommand = cli.Command{
 	},
 	Action: func(c *cli.Context) error {
 		projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
+		i := 0
 
 		for _, resource := range projectConfig.Resources {
+			logInfo(fmt.Sprintf("Using {PathGlob=%v PathExclude=%v}", resource.PathGlob, resource.PathExclude))
+
 			for _, v := range resource.Files() {
-				fmt.Println(v)
+				logInfo(v)
+				i++
 			}
 		}
+
+		logInfo(fmt.Sprintf("%d files", i))
 
 		return nil
 	},
