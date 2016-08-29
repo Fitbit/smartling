@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/mdreizin/smartling/model"
 	"github.com/mdreizin/smartling/service"
 	"gopkg.in/urfave/cli.v1"
+	"strings"
 	"sync"
 	"time"
 )
@@ -67,7 +69,7 @@ var pullCommand = cli.Command{
 				go func(fileURIs []string, resource model.ProjectResource) {
 					defer wg.Done()
 
-					logInfo(fmt.Sprintf("Pull %v...", fileURIs))
+					logInfo(fmt.Sprintf("Pull [%s]...", color.MagentaString(strings.Join(fileURIs, " "))))
 
 					files, err := container.FileService.Pull(&service.FilePullParams{
 						ProjectID:              projectConfig.Project.ID,
@@ -81,7 +83,7 @@ var pullCommand = cli.Command{
 					if err == nil {
 						for _, file := range files {
 							if !visited[file.Path] {
-								logInfo(fmt.Sprintf("Pulled %s", projectConfig.FilePath(file.Path)))
+								logInfo(fmt.Sprintf("Pulled %s", color.MagentaString(projectConfig.FilePath(file.Path))))
 
 								visited[file.Path] = true
 								i++
@@ -90,7 +92,7 @@ var pullCommand = cli.Command{
 							projectConfig.SaveFile(file, &resource)
 						}
 					} else {
-						logError(fmt.Sprintf("Pull %v was rejected %v", fileURIs, err))
+						logError(fmt.Sprintf("Pull [%s] was rejected %s", color.MagentaString(strings.Join(fileURIs, " ")), color.RedString(err.Error())))
 					}
 				}(fileURIs, resource)
 			}
