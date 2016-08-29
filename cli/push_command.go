@@ -5,6 +5,7 @@ import (
 	"github.com/mdreizin/smartling/service"
 	"gopkg.in/urfave/cli.v1"
 	"sync"
+	"fmt"
 )
 
 var pushCommand = cli.Command{
@@ -30,6 +31,8 @@ var pushCommand = cli.Command{
 
 			for _, path := range resource.Files() {
 				wg.Add(1)
+
+				fmt.Println(path)
 
 				go func(path string, resource model.ProjectResource, directives map[string]string) {
 					defer wg.Done()

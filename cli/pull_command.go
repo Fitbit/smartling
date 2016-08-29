@@ -5,6 +5,7 @@ import (
 	"github.com/mdreizin/smartling/service"
 	"gopkg.in/urfave/cli.v1"
 	"sync"
+	"fmt"
 )
 
 var pullCommand = cli.Command{
@@ -49,6 +50,8 @@ var pullCommand = cli.Command{
 
 			for _, v := range resource.Files() {
 				fileURIs = append(fileURIs, projectConfig.FileURI(v))
+
+				fmt.Println(v)
 			}
 
 			go func(fileURIs []string, resource model.ProjectResource) {

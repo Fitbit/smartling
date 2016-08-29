@@ -17,5 +17,5 @@ func TestPushCommand(t *testing.T) {
 	resp, err := test.RunApp(app, args)
 
 	a.NoError(err)
-	a.Equal("", resp)
+	a.NotEqual("", resp)
 }
