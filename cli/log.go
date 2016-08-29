@@ -2,17 +2,15 @@ package main
 
 import (
 	"github.com/fatih/color"
-	"log"
+	"fmt"
 )
 
 func logInfo(v ...interface{}) {
-	log.SetPrefix(color.YellowString("[INFO]\t"))
-	log.SetFlags(0)
-	log.Println(v...)
+	fmt.Print(color.YellowString("[INFO]\t"))
+	fmt.Println(v...)
 }
 
 func logError(v ...interface{}) {
-	log.SetPrefix(color.RedString("[ERROR]\t"))
-	log.SetFlags(0)
-	log.Println(v...)
+	fmt.Print(color.RedString("[ERROR]\t"))
+	fmt.Println(v...)
 }
