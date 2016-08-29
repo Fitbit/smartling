@@ -9,6 +9,7 @@ import:
   subpackages:
   - query
 - package: github.com/mattn/go-zglob
+- package: github.com/Masterminds/sprig
 testImport:
 - package: github.com/stretchr/testify
   subpackages:

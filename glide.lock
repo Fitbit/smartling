@@ -1,5 +1,5 @@
-hash: 8a3b9fb85724f31342a91e042d41c1aa1910ab452fdc2dc7b5a9ff6514698303
-updated: 2016-08-26T14:55:36.977038768+03:00
+hash: 17c04a042c37d96e334886c4e66c7d1781a4953daf9c9a00fb0dbfc1414162eb
+updated: 2016-08-29T10:36:35.348077043+03:00
 imports:
 - name: github.com/aokoli/goutils
   version: 9c37978a95bd5c709a15883b6242714ea6709e64
@@ -20,13 +20,13 @@ imports:
 - name: github.com/mattn/go-zglob
   version: 2dbd7f37a45e993d5180a251b4bdd314d6333b70
 - name: golang.org/x/net
-  version: 6c89f9617983ee917132513a791d8b5850fe90c5
+  version: 6250b412798208e6c90b03b7c4f226de5aa299e2
   subpackages:
   - publicsuffix
 - name: gopkg.in/resty.v0
   version: 0eed47a8f8c2575a34a067585dc0853d91943ac4
 - name: gopkg.in/urfave/cli.v1
-  version: 1efa31f08b9333f1bd4882d61f9d668a70cd902e
+  version: a14d7d367bc02b1f57d88de97926727f2d936387
 - name: gopkg.in/yaml.v2
   version: e4d366fc3c7938e2958e662b4258c7a89e1f0e3e
 testImports:
