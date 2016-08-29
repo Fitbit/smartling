@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"path"
 	"regexp"
+	"strings"
 )
 
 type ProjectResource struct {
@@ -27,17 +28,23 @@ func (r *ProjectResource) PathFor(filename string, locale string) (string, error
 		return "", err
 	}
 
+	dir := path.Dir(filename)
+	base := path.Base(filename)
+	ext := path.Ext(filename)
+
 	data := struct {
 		Path   string
 		Dir    string
 		Base   string
+		Name   string
 		Ext    string
 		Locale string
 	}{
 		filename,
-		path.Dir(filename),
-		path.Base(filename),
-		path.Ext(filename),
+		dir,
+		base,
+		strings.TrimSuffix(base, ext),
+		ext,
 		locale,
 	}
 
