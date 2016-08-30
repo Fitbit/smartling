@@ -56,9 +56,9 @@ func (s *DefaultFileService) Pull(params *FilePullParams) ([]*model.File, error)
 			q.Add("fileNameMode", "UNCHANGED")
 			q.Add("localeMode", "LOCALE_IN_NAME")
 
-			client := resty.R().SetMultiValueQueryParams(q).SetAuthToken(params.AuthToken)
+			req := resty.R().SetMultiValueQueryParams(q).SetAuthToken(params.AuthToken)
 
-			if resp, err = client.Get(_url); err == nil {
+			if resp, err = req.Get(_url); err == nil {
 				body := resp.Body()
 
 				if reader, err = zip.NewReader(bytes.NewReader(body), int64(len(body))); err == nil {
@@ -91,7 +91,7 @@ func (s *DefaultFileService) Push(params *FilePushParams) (*model.FileStats, err
 		if q, err = query.Values(params); err == nil {
 			if filename, err = filepath.Abs(params.FilePath); err == nil {
 				if content, err = ioutil.ReadFile(filename); err == nil {
-					client := resty.R().
+					req := resty.R().
 						SetResult(rest.Model{}).
 						SetError(rest.Model{}).
 						SetAuthToken(params.AuthToken).
@@ -99,13 +99,13 @@ func (s *DefaultFileService) Push(params *FilePushParams) (*model.FileStats, err
 
 					for p, v := range q {
 						for _, pv := range v {
-							client.FormData.Add(p, pv)
+							req.FormData.Add(p, pv)
 						}
 					}
 
-					client.SetFormData(params.Directives)
+					req.SetFormData(params.Directives)
 
-					if resp, err = client.Post(_url); err == nil {
+					if resp, err = req.Post(_url); err == nil {
 						err = rest.Result(resp, &stats)
 					}
 				}
