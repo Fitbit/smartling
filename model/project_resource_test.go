@@ -65,15 +65,15 @@ func TestProjectResource_Files(t *testing.T) {
 	}, r4.Files())
 }
 
-func TestProjectResource_PartialFiles(t *testing.T) {
+func TestProjectResource_LimitFiles(t *testing.T) {
 	a := assert.New(t)
 	r := ProjectResource{
 		PathGlob: "testdata/**/en-US.json",
 	}
 
-	f1 := r.PartialFiles(-1)
-	f2 := r.PartialFiles(1)
-	f3 := r.PartialFiles(3)
+	f1 := r.LimitFiles(-1)
+	f2 := r.LimitFiles(1)
+	f3 := r.LimitFiles(3)
 
 	a.Len(f1, 1)
 	a.Len(f1[0], 2)

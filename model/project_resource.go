@@ -87,7 +87,7 @@ func (r *ProjectResource) Files() []string {
 	return allFiles
 }
 
-func (r *ProjectResource) PartialFiles(limit int) [][]string {
+func (r *ProjectResource) LimitFiles(limit int) [][]string {
 	files := r.Files()
 	partialFiles := [][]string{}
 

@@ -5,7 +5,9 @@ import (
 	"github.com/fatih/color"
 	"github.com/mdreizin/smartling/model"
 	"github.com/mdreizin/smartling/service"
+	"gopkg.in/go-playground/pool.v3"
 	"gopkg.in/urfave/cli.v1"
+	"runtime"
 	"strings"
 	"sync"
 	"time"
@@ -23,7 +25,7 @@ var pullCommand = cli.Command{
 			Name: "include-original-strings",
 		},
 		cli.IntFlag{
-			Name:  "limit",
+			Name:  "file-uris-limit",
 			Value: 20,
 		},
 	},
@@ -37,70 +39,74 @@ var pullCommand = cli.Command{
 		}, c)
 	},
 	Action: func(c *cli.Context) error {
-		defer elapsedTime("Pull", time.Now())
+		defer elapsedTime(time.Now())
+
+		p := pool.NewLimited(uint(runtime.NumCPU()))
+
+		defer p.Close()
+
+		batch := p.Batch()
 
 		container := c.App.Metadata[containerMetadataKey].(*service.Container)
 		authToken := c.App.Metadata[authTokenMetadataKey].(*model.AuthToken)
 		projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
 		retrievalType := c.String("retrieval-type")
 		includeOriginalStrings := c.Bool("include-original-strings")
-		limit := c.Int("limit")
-		localeIDs := []string{}
-		i := 0
+		limit := c.Int("file-uris-limit")
+		locales := []string{}
 
-		for k := range projectConfig.Locales {
-			localeIDs = append(localeIDs, k)
+		for locale := range projectConfig.Locales {
+			locales = append(locales, locale)
 		}
 
-		wg := &sync.WaitGroup{}
+		go func() {
+			for _, resource := range projectConfig.Resources {
+				for _, files := range resource.LimitFiles(limit) {
+					batch.Queue(pullJob(&pullRequest{
+						Files:                  files,
+						Locales:                locales,
+						IncludeOriginalStrings: includeOriginalStrings,
+						RetrievalType:          retrievalType,
+						Config:                 projectConfig,
+						Resource:               &resource,
+						AuthToken:              authToken.AccessToken,
+						FileService:            container.FileService,
+					}))
+				}
+			}
+
+			batch.QueueComplete()
+		}()
 
 		visited := map[string]bool{}
 
-		for _, resource := range projectConfig.Resources {
-			for _, f := range resource.PartialFiles(limit) {
-				wg.Add(1)
+		wg := &sync.WaitGroup{}
 
-				fileURIs := []string{}
+		for result := range batch.Results() {
+			resp := result.Value().(*pullResponse)
 
-				for _, v := range f {
-					fileURIs = append(fileURIs, projectConfig.FileURI(v))
-				}
+			if err := result.Error(); err != nil {
+				logError(fmt.Sprintf("[%s] have error %s", color.MagentaString(strings.Join(resp.Request.Files, " ")), color.RedString(err.Error())))
+			} else {
+				for _, file := range resp.Files {
+					wg.Add(1)
 
-				go func(fileURIs []string, resource model.ProjectResource) {
-					defer wg.Done()
-
-					logInfo(fmt.Sprintf("Pull [%s]...", color.MagentaString(strings.Join(fileURIs, " "))))
-
-					files, err := container.FileService.Pull(&service.FilePullParams{
-						ProjectID:              projectConfig.Project.ID,
-						FileURIs:               fileURIs,
-						LocaleIDs:              localeIDs,
-						RetrievalType:          retrievalType,
-						IncludeOriginalStrings: includeOriginalStrings,
-						AuthToken:              authToken.AccessToken,
-					})
-
-					if err == nil {
-						for _, file := range files {
-							if !visited[file.Path] {
-								logInfo(fmt.Sprintf("Pulled %s", color.MagentaString(projectConfig.FilePath(file.Path))))
-
-								visited[file.Path] = true
-								i++
-							}
-
-							projectConfig.SaveFile(file, &resource)
-						}
-					} else {
-						logError(fmt.Sprintf("Pull [%s] was rejected %s", color.MagentaString(strings.Join(fileURIs, " ")), color.RedString(err.Error())))
+					if !visited[file.Path] {
+						visited[file.Path] = true
 					}
-				}(fileURIs, resource)
+
+					go func(file *model.File, resource *model.ProjectResource) {
+						defer wg.Done()
+
+						projectConfig.SaveFile(file, resource)
+					}(file, resp.Request.Resource)
+				}
 			}
 		}
 
 		wg.Wait()
 
-		logInfo(fmt.Sprintf("Pulled %d files", i))
+		logInfo(fmt.Sprintf("%d files", len(visited)))
 
 		return nil
 	},
