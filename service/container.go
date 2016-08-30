@@ -3,6 +3,7 @@ package service
 import (
 	"github.com/facebookgo/inject"
 	"github.com/mdreizin/smartling/repository"
+	"github.com/mdreizin/smartling/rest"
 )
 
 type Container struct {
@@ -35,6 +36,10 @@ func (c *Container) SetUp(filename string) error {
 		&inject.Object{
 			Value: &DefaultFileService{},
 			Name:  "DefaultFileService",
+		},
+		&inject.Object{
+			Value: rest.Client(),
+			Name:  "DefaultRestClient",
 		},
 	)
 

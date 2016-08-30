@@ -38,7 +38,9 @@ func extractFile(zf *zip.File, locales []string) (file *model.File, err error) {
 	return file, err
 }
 
-type DefaultFileService struct{}
+type DefaultFileService struct {
+	Client *resty.Client `inject:"DefaultRestClient"`
+}
 
 func (s *DefaultFileService) Pull(params *FilePullParams) ([]*model.File, error) {
 	var (
@@ -51,12 +53,12 @@ func (s *DefaultFileService) Pull(params *FilePullParams) ([]*model.File, error)
 
 	files := []*model.File{}
 
-	if _url, err = rest.DynamicURL(rest.FilePullURL, &params); err == nil {
+	if _url, err = rest.GenerateURL(rest.FilePullURL, &params); err == nil {
 		if q, err = query.Values(params); err == nil {
 			q.Add("fileNameMode", "UNCHANGED")
 			q.Add("localeMode", "LOCALE_IN_NAME")
 
-			req := resty.R().SetMultiValueQueryParams(q).SetAuthToken(params.AuthToken)
+			req := s.Client.R().SetMultiValueQueryParams(q).SetAuthToken(params.AuthToken)
 
 			if resp, err = req.Get(_url); err == nil {
 				body := resp.Body()
@@ -87,11 +89,11 @@ func (s *DefaultFileService) Push(params *FilePushParams) (*model.FileStats, err
 
 	stats := &model.FileStats{}
 
-	if _url, err = rest.DynamicURL(rest.FilePushURL, &params); err == nil {
+	if _url, err = rest.GenerateURL(rest.FilePushURL, &params); err == nil {
 		if q, err = query.Values(params); err == nil {
 			if filename, err = filepath.Abs(params.FilePath); err == nil {
 				if content, err = ioutil.ReadFile(filename); err == nil {
-					req := resty.R().
+					req := s.Client.R().
 						SetResult(rest.Model{}).
 						SetError(rest.Model{}).
 						SetAuthToken(params.AuthToken).

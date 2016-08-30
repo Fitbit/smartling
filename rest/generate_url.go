@@ -5,8 +5,8 @@ import (
 	"text/template"
 )
 
-func DynamicURL(url string, data interface{}) (string, error) {
-	t, err := template.New("DynamicURLTemplate").Parse(StaticURL(url))
+func GenerateURL(url string, data interface{}) (string, error) {
+	t, err := template.New("GenerateURLTemplate").Parse(url)
 	wr := bytes.NewBufferString("")
 
 	if err == nil {

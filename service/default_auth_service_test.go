@@ -2,6 +2,7 @@ package service
 
 import (
 	"github.com/mdreizin/smartling/model"
+	"github.com/mdreizin/smartling/rest"
 	"github.com/mdreizin/smartling/test"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -17,7 +18,9 @@ func TestDefaultAuthService_Authenticate(t *testing.T) {
 		RefreshToken: "refreshToken",
 	}
 
-	authService := DefaultAuthService{}
+	authService := DefaultAuthService{
+		Client: rest.Client(),
+	}
 
 	resp, err := authService.Authenticate(&model.UserToken{
 		ID:     "userId",
@@ -40,7 +43,9 @@ func TestDefaultAuthService_Refresh(t *testing.T) {
 		RefreshToken: "refreshToken",
 	}
 
-	authService := DefaultAuthService{}
+	authService := DefaultAuthService{
+		Client: rest.Client(),
+	}
 
 	resp, err := authService.Refresh("refreshToken")
 

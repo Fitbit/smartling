@@ -2,6 +2,7 @@ package service
 
 import (
 	"github.com/mdreizin/smartling/model"
+	"github.com/mdreizin/smartling/rest"
 	"github.com/mdreizin/smartling/test"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -12,7 +13,9 @@ func TestDefaultFileService_Push(t *testing.T) {
 
 	defer ts.Close()
 
-	fileService := DefaultFileService{}
+	fileService := DefaultFileService{
+		Client: rest.Client(),
+	}
 
 	stats, err := fileService.Push(&FilePushParams{
 		ProjectID:  "projectId",
@@ -36,7 +39,9 @@ func TestDefaultFileService_Pull(t *testing.T) {
 
 	defer ts.Close()
 
-	fileService := DefaultFileService{}
+	fileService := DefaultFileService{
+		Client: rest.Client(),
+	}
 
 	files, err := fileService.Pull(&FilePullParams{
 		ProjectID: "projectId",

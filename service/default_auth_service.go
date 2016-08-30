@@ -6,18 +6,22 @@ import (
 	"gopkg.in/resty.v0"
 )
 
-type DefaultAuthService struct{}
+type DefaultAuthService struct {
+	Client *resty.Client `inject:"DefaultRestClient"`
+}
 
 func (s *DefaultAuthService) Authenticate(userToken *model.UserToken) (*model.AuthToken, error) {
-	return s.getToken(rest.StaticURL(rest.AuthenticateURL), userToken)
+	return s.getToken(rest.AuthenticateURL, userToken)
 }
 
 func (s *DefaultAuthService) Refresh(refreshToken string) (*model.AuthToken, error) {
-	return s.getToken(rest.StaticURL(rest.AuthenticateRefreshURL), struct {
+	data := struct {
 		RefreshToken string `json:"refreshToken"`
 	}{
 		refreshToken,
-	})
+	}
+
+	return s.getToken(rest.AuthenticateRefreshURL, data)
 }
 
 func (s *DefaultAuthService) getToken(url string, data interface{}) (*model.AuthToken, error) {
@@ -27,7 +31,7 @@ func (s *DefaultAuthService) getToken(url string, data interface{}) (*model.Auth
 	)
 
 	authToken := &model.AuthToken{}
-	req := resty.R().SetBody(data).SetResult(rest.Model{}).SetError(rest.Model{})
+	req := s.Client.R().SetBody(data).SetResult(rest.Model{}).SetError(rest.Model{})
 
 	if resp, err = req.Post(url); err == nil {
 		err = rest.Result(resp, &authToken)
