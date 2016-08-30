@@ -9,6 +9,7 @@ import (
 	"gopkg.in/resty.v0"
 	"io/ioutil"
 	"net/url"
+	"os"
 	"path/filepath"
 	"strings"
 )
@@ -84,7 +85,7 @@ func (s *DefaultFileService) Push(params *FilePushParams) (*model.FileStats, err
 		resp     *resty.Response
 		_url     string
 		filename string
-		content  []byte
+		reader   *os.File
 	)
 
 	stats := &model.FileStats{}
@@ -92,12 +93,12 @@ func (s *DefaultFileService) Push(params *FilePushParams) (*model.FileStats, err
 	if _url, err = rest.GenerateURL(rest.FilePushURL, &params); err == nil {
 		if q, err = query.Values(params); err == nil {
 			if filename, err = filepath.Abs(params.FilePath); err == nil {
-				if content, err = ioutil.ReadFile(filename); err == nil {
+				if reader, err = os.Open(filename); err == nil {
 					req := s.Client.R().
 						SetResult(rest.Model{}).
 						SetError(rest.Model{}).
 						SetAuthToken(params.AuthToken).
-						SetFileReader("file", "", bytes.NewReader(content))
+						SetFileReader("file", "", reader)
 
 					for p, v := range q {
 						for _, pv := range v {

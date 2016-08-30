@@ -6,11 +6,9 @@ import (
 )
 
 func logInfo(v ...interface{}) {
-	fmt.Print(color.YellowString("[INFO]\t"))
-	fmt.Println(v...)
+	fmt.Println(color.YellowString("[INFO]\t"), fmt.Sprint(v...))
 }
 
 func logError(v ...interface{}) {
-	fmt.Print(color.RedString("[ERROR]\t"))
-	fmt.Println(v...)
+	fmt.Println(color.RedString("[ERROR]\t%v"), fmt.Sprint(v...))
 }
