@@ -13,25 +13,23 @@ func (s *DefaultAuthService) Authenticate(userToken *model.UserToken) (*model.Au
 }
 
 func (s *DefaultAuthService) Refresh(refreshToken string) (*model.AuthToken, error) {
-	req := struct {
+	return s.getToken(rest.StaticURL(rest.AuthenticateRefreshURL), struct {
 		RefreshToken string `json:"refreshToken"`
 	}{
 		refreshToken,
-	}
-
-	return s.getToken(rest.StaticURL(rest.AuthenticateRefreshURL), req)
+	})
 }
 
-func (s *DefaultAuthService) getToken(url string, req interface{}) (*model.AuthToken, error) {
+func (s *DefaultAuthService) getToken(url string, data interface{}) (*model.AuthToken, error) {
 	var (
 		err  error
 		resp *resty.Response
 	)
 
 	authToken := &model.AuthToken{}
-	client := resty.R().SetBody(req).SetResult(rest.Model{}).SetError(rest.Model{})
+	req := resty.R().SetBody(data).SetResult(rest.Model{}).SetError(rest.Model{})
 
-	if resp, err = client.Post(url); err == nil {
+	if resp, err = req.Post(url); err == nil {
 		err = rest.Result(resp, &authToken)
 	}
 
