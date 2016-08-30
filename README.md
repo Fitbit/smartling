@@ -79,6 +79,7 @@ GLOBAL OPTIONS:
    --project-alias value   [$SMARTLING_PROJECT_ALIAS]
    --user-id value         [$SMARTLING_USER_ID]
    --user-secret value     [$SMARTLING_USER_SECRET]
+   --no-color
    --help, -h             show help
    --version, -v          print the version
 
