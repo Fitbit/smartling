@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/fatih/color"
 	"fmt"
+	"github.com/fatih/color"
 )
 
 func logInfo(v ...interface{}) {
