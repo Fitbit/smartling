@@ -16,6 +16,8 @@ import:
   - '...'
 - package: gopkg.in/go-playground/pool.v3
   version: v3.1.1
+- package: gopkg.in/urfave/cli.v1
+  version: ~1.18.1
 testImport:
 - package: github.com/stretchr/testify
   subpackages:
