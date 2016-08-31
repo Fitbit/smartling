@@ -3,12 +3,24 @@ package main
 import (
 	"fmt"
 	"github.com/fatih/color"
+	"log"
+	"os"
 )
 
+var logger *log.Logger
+
+func currentLogger() *log.Logger {
+	if logger == nil {
+		logger = log.New(os.Stdout, "", 0)
+	}
+
+	return logger
+}
+
 func logInfo(v ...interface{}) {
-	fmt.Println(color.YellowString("[INFO]\t"), fmt.Sprint(v...))
+	currentLogger().Println(color.YellowString("[INFO]\t"), fmt.Sprint(v...))
 }
 
 func logError(v ...interface{}) {
-	fmt.Println(color.RedString("[ERROR]\t%v"), fmt.Sprint(v...))
+	currentLogger().Println(color.RedString("[ERROR]\t"), fmt.Sprint(v...))
 }
