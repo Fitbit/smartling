@@ -14,6 +14,8 @@ func currentLogger() *log.Logger {
 		logger = log.New(os.Stdout, "", 0)
 	}
 
+	logger.SetOutput(os.Stdout)
+
 	return logger
 }
 
