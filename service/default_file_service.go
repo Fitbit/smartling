@@ -6,6 +6,7 @@ import (
 	"github.com/google/go-querystring/query"
 	"github.com/mdreizin/smartling/model"
 	"github.com/mdreizin/smartling/rest"
+	"gopkg.in/go-playground/pool.v3"
 	"gopkg.in/resty.v0"
 	"io/ioutil"
 	"net/url"
@@ -13,31 +14,6 @@ import (
 	"path/filepath"
 	"strings"
 )
-
-func extractFile(zf *zip.File, locales []string) (file *model.File, err error) {
-	file = &model.File{}
-
-	if rc, err := zf.Open(); err == nil {
-		if b, err := ioutil.ReadAll(rc); err == nil {
-			for _, locale := range locales {
-				name := zf.Name
-				localeSuffix := "_" + locale
-
-				if strings.Contains(name, localeSuffix) {
-					file.Path = strings.Replace(name, localeSuffix, "", -1)
-					file.LocaleID = locale
-					break
-				}
-			}
-
-			file.Content = b
-		}
-
-		rc.Close()
-	}
-
-	return file, err
-}
 
 type DefaultFileService struct {
 	Client *resty.Client `inject:"DefaultRestClient"`
@@ -54,6 +30,12 @@ func (s *DefaultFileService) Pull(params *FilePullParams) ([]*model.File, error)
 
 	files := []*model.File{}
 
+	p := pool.New()
+
+	defer p.Close()
+
+	batch := p.Batch()
+
 	if _url, err = rest.GenerateURL(rest.FilePullURL, &params); err == nil {
 		if q, err = query.Values(params); err == nil {
 			q.Add("fileNameMode", "UNCHANGED")
@@ -64,14 +46,24 @@ func (s *DefaultFileService) Pull(params *FilePullParams) ([]*model.File, error)
 			if resp, err = req.Get(_url); err == nil {
 				body := resp.Body()
 
-				if reader, err = zip.NewReader(bytes.NewReader(body), int64(len(body))); err == nil {
-					for _, zf := range reader.File {
-						if file, err := extractFile(zf, params.LocaleIDs); err == nil {
-							files = append(files, file)
+				go func(params *FilePullParams) {
+					if reader, err = zip.NewReader(bytes.NewReader(body), int64(len(body))); err == nil {
+						for _, file := range reader.File {
+							batch.Queue(s.extractFileJob(file, params.LocaleIDs))
 						}
 					}
-				}
+
+					batch.QueueComplete()
+				}(params)
 			}
+		}
+	}
+
+	for result := range batch.Results() {
+		resp := result.Value().(*model.File)
+
+		if err := result.Error(); err == nil {
+			files = append(files, resp)
 		}
 	}
 
@@ -117,4 +109,41 @@ func (s *DefaultFileService) Push(params *FilePushParams) (*model.FileStats, err
 	}
 
 	return stats, err
+}
+
+func (s *DefaultFileService) extractFile(zf *zip.File, locales []string) (*model.File, error) {
+	var err error
+
+	file := &model.File{}
+
+	if rc, err := zf.Open(); err == nil {
+		if b, err := ioutil.ReadAll(rc); err == nil {
+			for _, locale := range locales {
+				name := zf.Name
+				localeSuffix := "_" + locale
+
+				if strings.Contains(name, localeSuffix) {
+					file.Path = strings.Replace(name, localeSuffix, "", -1)
+					file.LocaleID = locale
+					break
+				}
+			}
+
+			file.Content = b
+		}
+
+		rc.Close()
+	}
+
+	return file, err
+}
+
+func (s *DefaultFileService) extractFileJob(zf *zip.File, locales []string) pool.WorkFunc {
+	return func(wu pool.WorkUnit) (interface{}, error) {
+		if wu.IsCancelled() {
+			return nil, nil
+		}
+
+		return s.extractFile(zf, locales)
+	}
 }
