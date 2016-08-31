@@ -13,7 +13,7 @@ func TestPullCommand(t *testing.T) {
 
 	a := assert.New(t)
 	app := newApp()
-	args := []string{"cli", "pull"}
+	args := []string{"cli", "--no-color", "pull"}
 	resp, err := test.RunApp(app, args)
 
 	a.NoError(err)
