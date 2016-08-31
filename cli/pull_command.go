@@ -9,7 +9,6 @@ import (
 	"gopkg.in/urfave/cli.v1"
 	"runtime"
 	"strings"
-	"sync"
 	"time"
 )
 
@@ -80,31 +79,21 @@ var pullCommand = cli.Command{
 
 		visited := map[string]bool{}
 
-		wg := &sync.WaitGroup{}
-
 		for result := range batch.Results() {
 			resp := result.Value().(*pullResponse)
 
 			if err := result.Error(); err != nil {
-				logError(fmt.Sprintf("[%s] have error %s", color.MagentaString(strings.Join(resp.Request.Files, " ")), color.RedString(err.Error())))
+				logError(fmt.Sprintf("[%s] has error %s", color.MagentaString(strings.Join(resp.Request.Files, " ")), color.RedString(err.Error())))
 			} else {
 				for _, file := range resp.Files {
-					wg.Add(1)
-
 					if !visited[file.Path] {
 						visited[file.Path] = true
 					}
-
-					go func(file *model.File, resource *model.ProjectResource) {
-						defer wg.Done()
-
-						projectConfig.SaveFile(file, resource)
-					}(file, resp.Request.Resource)
 				}
+
+				projectConfig.SaveAllFiles(resp.Files, resp.Request.Resource)
 			}
 		}
-
-		wg.Wait()
 
 		logInfo(fmt.Sprintf("%d files", len(visited)))
 
