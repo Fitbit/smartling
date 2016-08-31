@@ -13,17 +13,17 @@ func pullJob(req *pullRequest) pool.WorkFunc {
 			return nil, nil
 		}
 
-		f := []string{}
+		uris := []string{}
 
 		for _, path := range req.Files {
 			logInfo(fmt.Sprintf("Pull %s", color.MagentaString(path)))
 
-			f = append(f, req.Config.FileURI(path))
+			uris = append(uris, req.Config.FileURI(path))
 		}
 
 		params := &service.FilePullParams{
 			ProjectID:              req.Config.Project.ID,
-			FileURIs:               f,
+			FileURIs:               uris,
 			LocaleIDs:              req.Locales,
 			RetrievalType:          req.RetrievalType,
 			IncludeOriginalStrings: req.IncludeOriginalStrings,
