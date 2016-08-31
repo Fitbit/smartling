@@ -13,7 +13,7 @@ func TestPushCommand(t *testing.T) {
 
 	a := assert.New(t)
 	app := newApp()
-	args := []string{"cli", "push"}
+	args := []string{"cli", "--no-color", "push"}
 	resp, err := test.RunApp(app, args)
 
 	a.NoError(err)
