@@ -9,7 +9,7 @@ import (
 func TestListCommand(t *testing.T) {
 	a := assert.New(t)
 	app := newApp()
-	args := []string{"cli", "list"}
+	args := []string{"cli", "--no-color", "list"}
 	resp, err := test.RunApp(app, args)
 
 	a.NoError(err)
