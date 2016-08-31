@@ -5,6 +5,7 @@ import (
 	"github.com/Masterminds/sprig"
 	"github.com/mattn/go-zglob"
 	"html/template"
+	"math"
 	"path"
 	"regexp"
 	"strings"
@@ -89,26 +90,30 @@ func (r *ProjectResource) Files() []string {
 
 func (r *ProjectResource) LimitFiles(limit int) [][]string {
 	files := r.Files()
-	partialFiles := [][]string{}
+	pages := [][]string{}
 
 	if limit < 0 || len(files) < limit {
-		partialFiles = append(partialFiles, files)
+		pages = append(pages, files)
 	} else if limit > 0 {
-		q := []string{}
-		i := 0
+		p := int(math.Ceil(float64(float32(len(files)) / float32(limit))))
 
-		for _, x := range files {
-			i++
-			q = append(q, x)
+		for i := 0; i < p; i++ {
+			var page []string
 
-			if i == limit {
-				partialFiles = append(partialFiles, q)
+			low := limit * i
+			high := limit * (i + 1)
 
-				q = []string{}
-				i = 0
+			if i == 0 {
+				page = files[0:limit]
+			} else if i < p-1 {
+				page = files[low:high]
+			} else {
+				page = files[low:]
 			}
+
+			pages = append(pages, page)
 		}
 	}
 
-	return partialFiles
+	return pages
 }

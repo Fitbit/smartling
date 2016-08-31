@@ -68,20 +68,32 @@ func TestProjectResource_Files(t *testing.T) {
 func TestProjectResource_LimitFiles(t *testing.T) {
 	a := assert.New(t)
 	r := ProjectResource{
-		PathGlob: "testdata/**/en-US.json",
+		PathGlob: "testdata/**/*.json",
 	}
 
 	f1 := r.LimitFiles(-1)
 	f2 := r.LimitFiles(1)
 	f3 := r.LimitFiles(3)
+	f4 := r.LimitFiles(4)
 
 	a.Len(f1, 1)
-	a.Len(f1[0], 2)
+	a.Len(f1[0], 7)
 
-	a.Len(f2, 2)
+	a.Len(f2, 7)
 	a.Len(f2[0], 1)
 	a.Len(f2[1], 1)
+	a.Len(f2[2], 1)
+	a.Len(f2[3], 1)
+	a.Len(f2[4], 1)
+	a.Len(f2[5], 1)
+	a.Len(f2[6], 1)
 
-	a.Len(f3, 1)
-	a.Len(f3[0], 2)
+	a.Len(f3, 3)
+	a.Len(f3[0], 3)
+	a.Len(f3[1], 3)
+	a.Len(f3[2], 1)
+
+	a.Len(f4, 2)
+	a.Len(f4[0], 4)
+	a.Len(f4[1], 3)
 }
