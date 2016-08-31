@@ -16,7 +16,7 @@ func pullJob(req *pullRequest) pool.WorkFunc {
 		uris := []string{}
 
 		for _, path := range req.Files {
-			logInfo(fmt.Sprintf("Pull %s", color.MagentaString(path)))
+			logInfo(fmt.Sprintf("%s", color.MagentaString(path)))
 
 			uris = append(uris, req.Config.FileURI(path))
 		}
