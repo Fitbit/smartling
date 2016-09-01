@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"github.com/mdreizin/smartling/model"
 	"gopkg.in/urfave/cli.v1"
 	"strings"
@@ -11,22 +12,22 @@ func validateProjectConfigAction(c *cli.Context) error {
 
 	issues := []string{}
 
-	projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
+	projectConfig := c.App.Metadata[projectConfigKey].(*model.ProjectConfig)
 
 	if projectConfig.Project.ID == "" {
-		issues = append(issues, "`project-id` is required")
+		issues = append(issues, "project-id is required")
 	}
 
 	if projectConfig.UserToken.ID == "" {
-		issues = append(issues, "`user-id` is required")
+		issues = append(issues, "user-id is required")
 	}
 
 	if projectConfig.UserToken.Secret == "" {
-		issues = append(issues, "`user-secret` is required")
+		issues = append(issues, "user-secret is required")
 	}
 
 	if len(issues) > 0 {
-		err = cli.NewExitError(strings.Join(issues, "\n"), -1)
+		err = errors.New(strings.Join(issues, "\n"))
 	}
 
 	return err

@@ -7,7 +7,7 @@ import (
 )
 
 func injectProjectConfigAction(c *cli.Context) error {
-	container := c.App.Metadata[containerMetadataKey].(*service.Container)
+	container := c.App.Metadata[containerKey].(*service.Container)
 	project := &model.Project{
 		ID:    c.GlobalString("project-id"),
 		Alias: c.GlobalString("project-alias"),
@@ -52,7 +52,7 @@ func injectProjectConfigAction(c *cli.Context) error {
 		}
 	}
 
-	c.App.Metadata[projectConfigMetadataKey] = projectConfig
+	c.App.Metadata[projectConfigKey] = projectConfig
 
 	return err
 }

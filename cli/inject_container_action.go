@@ -15,7 +15,7 @@ func injectContainerAction(c *cli.Context) error {
 		err = container.SetUp(filename)
 	}
 
-	c.App.Metadata[containerMetadataKey] = &container
+	c.App.Metadata[containerKey] = &container
 
 	return err
 }

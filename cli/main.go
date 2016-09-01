@@ -3,11 +3,9 @@ package main
 import "os"
 
 func main() {
-	run()
-}
+	err := runApp()
 
-func run() error {
-	app := newApp()
-
-	return app.Run(os.Args)
+	if err != nil {
+		os.Exit(1)
+	}
 }

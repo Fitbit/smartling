@@ -21,7 +21,7 @@ var listCommand = cli.Command{
 		}, c)
 	},
 	Action: func(c *cli.Context) error {
-		projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
+		projectConfig := c.App.Metadata[projectConfigKey].(*model.ProjectConfig)
 		i := 0
 
 		for _, resource := range projectConfig.Resources {

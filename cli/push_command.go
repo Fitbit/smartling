@@ -32,9 +32,9 @@ var pushCommand = cli.Command{
 
 		batch := p.Batch()
 
-		container := c.App.Metadata[containerMetadataKey].(*service.Container)
-		authToken := c.App.Metadata[authTokenMetadataKey].(*model.AuthToken)
-		projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
+		container := c.App.Metadata[containerKey].(*service.Container)
+		authToken := c.App.Metadata[authTokenKey].(*model.AuthToken)
+		projectConfig := c.App.Metadata[projectConfigKey].(*model.ProjectConfig)
 
 		go func() {
 			for _, resource := range projectConfig.Resources {
