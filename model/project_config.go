@@ -75,6 +75,8 @@ func (c *ProjectConfig) SaveAllFiles(files []*File, resource *ProjectResource) {
 
 		batch.QueueComplete()
 	}()
+
+	batch.WaitAll()
 }
 
 func (c *ProjectConfig) saveFileJob(file *File, resource *ProjectResource) pool.WorkFunc {
