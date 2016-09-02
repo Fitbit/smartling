@@ -2,13 +2,14 @@ package main
 
 import (
 	"gopkg.in/urfave/cli.v1"
+	"strings"
 )
 
 func newApp() *cli.App {
 	app := cli.NewApp()
 
 	app.Name = "smartling"
-	app.Version = Version
+	app.Version = strings.TrimPrefix(Version, "v")
 	app.Usage = "Smartling CLI to `upload` and `download` translations"
 	app.Author = "Marat Dreizin"
 	app.Email = "marat.dreizin@gmail.com"
