@@ -19,10 +19,14 @@ func currentLogger() *log.Logger {
 	return logger
 }
 
+func logPrefix(level string) string {
+	return fmt.Sprintf("[%s]", level)
+}
+
 func logInfo(v ...interface{}) {
-	currentLogger().Println(color.YellowString("[INFO]\t"), fmt.Sprint(v...))
+	currentLogger().Println(color.YellowString(logPrefix(logLevelInfo)), fmt.Sprint(v...))
 }
 
 func logError(v ...interface{}) {
-	currentLogger().Println(color.RedString("[ERROR]\t"), fmt.Sprint(v...))
+	currentLogger().Println(color.RedString(logPrefix(logLevelError)), fmt.Sprint(v...))
 }
