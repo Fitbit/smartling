@@ -12,6 +12,13 @@ Supports only Smartling's API v2
 - [x] `pull` - Downloads translations
 - [x] `list` - Shows a list of local translations
 
+## Homebrew
+
+```
+brew tap mdreizin/tap
+brew install smartling
+```
+
 ## Download
 
 All available releases you can find [here]({"gitdown": "gitinfo", "name": "url"}/releases).
