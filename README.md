@@ -1,49 +1,89 @@
 [![Travis build status](http://img.shields.io/travis/mdreizin/smartling/master.svg?style=flat-square)](https://travis-ci.org/mdreizin/smartling)
 [![Coverage Status](https://img.shields.io/coveralls/mdreizin/smartling/master.svg?style=flat-square)](https://coveralls.io/r/mdreizin/smartling?branch=master)
 
-<h1 id="smartling">smartling</h1>
+<a name="smartling"></a>
+# smartling
 > Smartling CLI to `upload` and `download` translations
 
 Supports only Smartling's API v2
 
-<h2 id="smartling-commands">Commands</h2>
+<a name="smartling-commands"></a>
+## Commands
 
 - [x] `push` - Uploads translations
 - [x] `pull` - Downloads translations
 - [x] `list` - Shows a list of local translations
 
-<h2 id="smartling-homebrew">Homebrew</h2>
+<a name="smartling-homebrew"></a>
+## Homebrew
 
 ```
 brew tap mdreizin/tap
 brew install smartling
 ```
 
-<h2 id="smartling-download">Download</h2>
+<a name="smartling-download"></a>
+## Download
 
 All available releases you can find [here](https://github.com/mdreizin/smartling/releases).
 
-<h2 id="smartling-usage">Usage</h2>
+<a name="smartling-usage"></a>
+## Usage
 
 Please defined `.smartling.yml` under your repo:
 
 `.smartling.yml`
 
 ```yml
+# The User Identifier for your Smartling v2 API Token.
 UserId: <SMARTLING_USER_ID>
+# The token secret for your Smartling v2 API Token.
 UserSecret: <SMARTLING_USER_SECRET>
+# Unique id of your project.
 ProjectId: <SMARTLING_PROJECT_ID>
+# The alias is used in creating the "fileURI" that is registered with Smartling for uploaded files.
+# A unique alias value is recommended but not required.
+# The complete "fileURI" will be "ProjectAlias/FilePath".
 ProjectAlias: <SMARTLING_PROJECT_ALIAS>
+# List of files which will be uploaded/downloaded.
 Files:
-- Type: json
+- # The Smartling API "fileType".
+  # Possible values: "javaProperties", "ios", "android", "json" etc.
+  # Please see documentation which types are supported:
+  # http://docs.smartling.com/pages/supported-file-types
+  Type: json
+  # "glob" expression defining which project files to upload to Smartling:
+  # https://github.com/mattn/go-zglob
+  # All files matching the expression will be uploaded.
   PathGlob: translations/**/en-US.json
+  # List of "glob" expressions defining which project files will be excluded from upload.
   PathExclude:
   - translations/foo/en-US.json
+  # The expression used to create a file path and name for translated files:
+  # https://golang.org/pkg/html/template
+  # Predefined variables for the expression are:
+  # Path - original file path
+  # Name - original file name without extension
+  # Dir - original file directory path
+  # Base - original file name with extension
+  # Ext - original file extension
+  # Locale - project locale code value
+  # Also lot of built-in functions are available:
+  # https://github.com/Masterminds/sprig
   PathExpression: '{{ .Dir }}/{{ .Locale }}{{ .Ext }}'
+  # Defines whether uploaded content will automatically be authorized for translation.
   AuthorizeContent: true
+  # File directives can be used to alter the way how Smartling handles your files.
+  # Please see documentation which directives are available:
+  # https://docs.smartling.com/pages/supported-file-types
   Directives:
+    # <directive name>: <directive value>
     string_format: NONE
+# List of allowed locales and must list at least one locale.
+# If you add extra locales to your project, you will need to update this file for the new locales.
+# It also serves as a mapping of locale codes from Smartling API codes to the codes that are used in the project.
 Locales:
+  # <Smartling locale code>: <project locale code>
   de-DE: de-DE
   es-ES: es-ES
   fr-FR: fr-FR
@@ -92,19 +132,23 @@ GLOBAL OPTIONS:
 
 ```
 
-<h2 id="smartling-setup">Setup</h2>
+<a name="smartling-setup"></a>
+## Setup
 
 * Run `brew install go glide`
 * Run `make restore`
 
-<h2 id="smartling-develop">Develop</h2>
+<a name="smartling-develop"></a>
+## Develop
 
 * Run `make build` and execute `smartling`
 
-<h2 id="smartling-test">Test</h2>
+<a name="smartling-test"></a>
+## Test
 
 * Run `make test`
 
-<h2 id="smartling-cover">Cover</h2>
+<a name="smartling-cover"></a>
+## Cover
 
 * Run `make cover` or `make cover-html`
