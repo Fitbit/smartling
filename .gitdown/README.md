@@ -2,9 +2,17 @@
 {"gitdown": "badge", "name": "coveralls"}
 
 # {"gitdown": "gitinfo", "name": "name"}
-> Smartling CLI to `upload` and `download` translations
+> CLI to work with Smartling translations
 
-Supports only Smartling's API v2
+CLI tool provides simple unix-style command line interface to work with Smartling translations.
+
+It is designed to make the downloading/uploading process very speedy.
+
+## Features
+
+- [x] Highly configurable via `.smartling.yml`
+- [x] Designed to speedy upload/download (heavy) translations
+- [x] Supports Smartling's API v2
 
 ## Commands
 
@@ -25,7 +33,7 @@ All available releases you can find [here]({"gitdown": "gitinfo", "name": "url"}
 
 ## Usage
 
-Please defined `.smartling.yml` under your repo:
+Please define `.smartling.yml` under your repo:
 
 `.smartling.yml`
 

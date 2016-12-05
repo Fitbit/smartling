@@ -1,5 +1,5 @@
 NAME:
-   smartling - Smartling CLI to `upload` and `download` translations
+   smartling - CLI to work with Smartling translations
 
 USAGE:
    smartling [global options] command [command options] [arguments...]
