@@ -12,7 +12,7 @@ package main
 import (
 	"fmt"
 	"github.com/fatih/color"
-	"github.com/mdreizin/smartling/model"
+	"github.com/Fitbit/smartling/model"
 	"gopkg.in/urfave/cli.v1"
 )
 

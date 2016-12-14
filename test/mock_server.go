@@ -13,7 +13,7 @@ import (
 	"archive/zip"
 	"bytes"
 	"fmt"
-	"github.com/mdreizin/smartling/rest"
+	"github.com/Fitbit/smartling/rest"
 	"net/http"
 	"net/http/httptest"
 	"strings"

@@ -10,8 +10,8 @@
 package service
 
 import (
-	"github.com/mdreizin/smartling/model"
-	"github.com/mdreizin/smartling/rest"
+	"github.com/Fitbit/smartling/model"
+	"github.com/Fitbit/smartling/rest"
 	"gopkg.in/resty.v0"
 )
 

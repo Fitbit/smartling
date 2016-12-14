@@ -9,7 +9,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package repository
 
-import "github.com/mdreizin/smartling/model"
+import "github.com/Fitbit/smartling/model"
 
 type ProjectConfigRepository interface {
 	GetConfig() (*model.ProjectConfig, error)

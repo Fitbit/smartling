@@ -11,7 +11,7 @@ package main
 
 import (
 	"errors"
-	"github.com/mdreizin/smartling/model"
+	"github.com/Fitbit/smartling/model"
 	"gopkg.in/urfave/cli.v1"
 	"strings"
 )

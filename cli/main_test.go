@@ -10,7 +10,7 @@
 package main
 
 import (
-	"github.com/mdreizin/smartling/test"
+	"github.com/Fitbit/smartling/test"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"

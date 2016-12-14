@@ -9,7 +9,7 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package service
 
-import "github.com/mdreizin/smartling/model"
+import "github.com/Fitbit/smartling/model"
 
 type FileService interface {
 	Pull(*FilePullParams) ([]*model.File, error)

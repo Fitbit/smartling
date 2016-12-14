@@ -1,5 +1,5 @@
-[![Travis build status](http://img.shields.io/travis/mdreizin/smartling/master.svg?style=flat-square)](https://travis-ci.org/mdreizin/smartling)
-[![Coverage Status](https://img.shields.io/coveralls/mdreizin/smartling/master.svg?style=flat-square)](https://coveralls.io/r/mdreizin/smartling?branch=master)
+[![Travis build status](http://img.shields.io/travis/Fitbit/smartling/master.svg?style=flat-square)](https://travis-ci.org/Fitbit/smartling)
+[![Coverage Status](https://img.shields.io/coveralls/Fitbit/smartling/master.svg?style=flat-square)](https://coveralls.io/r/Fitbit/smartling?branch=master)
 
 <a name="smartling"></a>
 # smartling
@@ -34,7 +34,7 @@ brew install smartling
 <a name="smartling-download"></a>
 ## Download
 
-All available releases you can find [here](https://github.com/mdreizin/smartling/releases).
+All available releases you can find [here](https://github.com/Fitbit/smartling/releases).
 
 <a name="smartling-usage"></a>
 ## Usage

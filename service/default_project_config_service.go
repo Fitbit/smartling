@@ -10,8 +10,8 @@
 package service
 
 import (
-	"github.com/mdreizin/smartling/model"
-	"github.com/mdreizin/smartling/repository"
+	"github.com/Fitbit/smartling/model"
+	"github.com/Fitbit/smartling/repository"
 )
 
 type DefaultProjectConfigService struct {

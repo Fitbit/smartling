@@ -12,7 +12,7 @@ package main
 import (
 	"fmt"
 	"github.com/fatih/color"
-	"github.com/mdreizin/smartling/service"
+	"github.com/Fitbit/smartling/service"
 	"gopkg.in/go-playground/pool.v3"
 )
 

@@ -10,7 +10,7 @@
 package main
 
 import (
-	"github.com/mdreizin/smartling/service"
+	"github.com/Fitbit/smartling/service"
 	"gopkg.in/urfave/cli.v1"
 	"path/filepath"
 )

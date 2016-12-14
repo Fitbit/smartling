@@ -10,7 +10,7 @@
 package repository
 
 import (
-	"github.com/mdreizin/smartling/model"
+	"github.com/Fitbit/smartling/model"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 )

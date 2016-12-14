@@ -10,8 +10,8 @@
 package main
 
 import (
-	"github.com/mdreizin/smartling/model"
-	"github.com/mdreizin/smartling/service"
+	"github.com/Fitbit/smartling/model"
+	"github.com/Fitbit/smartling/service"
 )
 
 type pushResponse struct {

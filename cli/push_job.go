@@ -10,7 +10,7 @@
 package main
 
 import (
-	"github.com/mdreizin/smartling/service"
+	"github.com/Fitbit/smartling/service"
 	"gopkg.in/go-playground/pool.v3"
 )
 

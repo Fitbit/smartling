@@ -1,4 +1,4 @@
-package: github.com/mdreizin/smartling
+package: github.com/Fitbit/smartling
 import:
 - package: gopkg.in/yaml.v2
 - package: github.com/imdario/mergo

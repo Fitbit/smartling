@@ -10,9 +10,9 @@
 package service
 
 import (
-	"github.com/mdreizin/smartling/model"
-	"github.com/mdreizin/smartling/rest"
-	"github.com/mdreizin/smartling/test"
+	"github.com/Fitbit/smartling/model"
+	"github.com/Fitbit/smartling/rest"
+	"github.com/Fitbit/smartling/test"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
