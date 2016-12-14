@@ -117,12 +117,6 @@ NAME:
 USAGE:
    smartling [global options] command [command options] [arguments...]
 
-VERSION:
-   dev
-
-AUTHOR(S):
-   Marat Dreizin <marat.dreizin@gmail.com>
-
 COMMANDS:
      push      Uploads translations
      pull      Downloads translations

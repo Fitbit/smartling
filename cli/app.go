@@ -20,8 +20,6 @@ func newApp() *cli.App {
 	app.Name = "smartling"
 	app.Version = strings.TrimPrefix(Version, "v")
 	app.Usage = "CLI to work with Smartling translations"
-	app.Author = "Marat Dreizin"
-	app.Email = "marat.dreizin@gmail.com"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:   "project-file",
