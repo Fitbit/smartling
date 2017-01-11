@@ -10,7 +10,7 @@ BIN_NAME:=smartling
 BUILD_DIR:=build
 COVER_DIR:=coverage
 
-.PHONY: clean build build-all dist fmt restore lint test bench cover cover-html coveralls readme
+.PHONY: clean build build-all dist fmt deps lint test bench cover cover-html coveralls readme
 
 clean:
 	@go clean $(PACKAGES)
@@ -43,7 +43,7 @@ dist:
 fmt:
 	@go fmt $(PACKAGES)
 
-restore:
+deps:
 	@go get -u -v github.com/axw/gocov/gocov
 	@go get -u -v github.com/matm/gocov-html
 	@go get -u -v github.com/wadey/gocovmerge

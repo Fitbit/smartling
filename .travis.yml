@@ -44,7 +44,7 @@ before_install:
   - go get -u -v github.com/Masterminds/glide
   - glide --version
 install:
-  - make restore
+  - make deps
 script:
   - make clean
   - make lint
