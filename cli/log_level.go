@@ -10,6 +10,6 @@
 package main
 
 const (
-	logLevelInfo = "INFO"
+	logLevelInfo  = "INFO"
 	logLevelError = "ERROR"
 )

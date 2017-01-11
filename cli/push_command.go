@@ -11,9 +11,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/fatih/color"
 	"github.com/Fitbit/smartling/model"
 	"github.com/Fitbit/smartling/service"
+	"github.com/fatih/color"
 	"gopkg.in/go-playground/pool.v3"
 	"gopkg.in/urfave/cli.v1"
 	"runtime"

@@ -12,9 +12,9 @@ package service
 import (
 	"archive/zip"
 	"bytes"
-	"github.com/google/go-querystring/query"
 	"github.com/Fitbit/smartling/model"
 	"github.com/Fitbit/smartling/rest"
+	"github.com/google/go-querystring/query"
 	"gopkg.in/go-playground/pool.v3"
 	"gopkg.in/resty.v0"
 	"io/ioutil"

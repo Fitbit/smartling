@@ -10,9 +10,9 @@
 package service
 
 import (
-	"github.com/facebookgo/inject"
 	"github.com/Fitbit/smartling/repository"
 	"github.com/Fitbit/smartling/rest"
+	"github.com/facebookgo/inject"
 )
 
 type Container struct {
