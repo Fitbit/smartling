@@ -15,7 +15,7 @@ import (
 )
 
 func disableColorAction(c *cli.Context) error {
-	color.NoColor = c.GlobalBool("no-color")
+	color.NoColor = c.GlobalBool(noColorFlagName)
 
 	return nil
 }

@@ -9,8 +9,14 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package main
 
-import "strings"
-
-func appKey(name string) string {
-	return "SMARTLING_" + strings.ToUpper(name)
-}
+var (
+	containerMetadataKey     = "container"
+	projectConfigMetadataKey = "project-config"
+	authTokenMetadataKey     = "auth-token"
+	projectFileFlagName      = "project-file"
+	projectIDFlagName        = "project-id"
+	projectAliasFlagName     = "project-alias"
+	userTokenIDFlagName      = "user-id"
+	userTokenSecretFlagName  = "user-secret"
+	noColorFlagName          = "no-color"
+)

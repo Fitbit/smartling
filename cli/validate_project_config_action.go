@@ -10,33 +10,35 @@
 package main
 
 import (
-	"errors"
-	"github.com/Fitbit/smartling/model"
 	"gopkg.in/urfave/cli.v1"
-	"strings"
+	"github.com/Fitbit/smartling/model"
+	"errors"
+	"fmt"
 )
 
 func validateProjectConfigAction(c *cli.Context) error {
 	var err error
 
-	issues := []string{}
+	me := cli.MultiError{
+		Errors: []error{},
+	}
 
-	projectConfig := c.App.Metadata[projectConfigKey].(*model.ProjectConfig)
+	projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
 
 	if projectConfig.Project.ID == "" {
-		issues = append(issues, "project-id is required")
+		me.Errors = append(me.Errors, fmt.Errorf("%s is required", projectIDFlagName))
 	}
 
 	if projectConfig.UserToken.ID == "" {
-		issues = append(issues, "user-id is required")
+		me.Errors = append(me.Errors, fmt.Errorf("%s is required", userTokenIDFlagName))
 	}
 
 	if projectConfig.UserToken.Secret == "" {
-		issues = append(issues, "user-secret is required")
+		me.Errors = append(me.Errors, fmt.Errorf("%s is required", userTokenSecretFlagName))
 	}
 
-	if len(issues) > 0 {
-		err = errors.New(strings.Join(issues, "\n"))
+	if len(me.Errors) > 0 {
+		err = errors.New(me.Error())
 	}
 
 	return err

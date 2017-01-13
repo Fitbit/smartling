@@ -22,28 +22,28 @@ func newApp() *cli.App {
 	app.Usage = "CLI to work with Smartling translations"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
-			Name:   "project-file",
+			Name:   projectFileFlagName,
 			Value:  ".smartling.yml",
-			EnvVar: appKey("project_file"),
+			EnvVar: envVar(projectFileFlagName),
 		},
 		cli.StringFlag{
-			Name:   "project-id",
-			EnvVar: appKey("project_id"),
+			Name:   projectIDFlagName,
+			EnvVar: envVar(projectIDFlagName),
 		},
 		cli.StringFlag{
-			Name:   "project-alias",
-			EnvVar: appKey("project_alias"),
+			Name:   projectAliasFlagName,
+			EnvVar: envVar(projectAliasFlagName),
 		},
 		cli.StringFlag{
-			Name:   "user-id",
-			EnvVar: appKey("user_id"),
+			Name:   userTokenIDFlagName,
+			EnvVar: envVar(userTokenIDFlagName),
 		},
 		cli.StringFlag{
-			Name:   "user-secret",
-			EnvVar: appKey("user_secret"),
+			Name:   userTokenSecretFlagName,
+			EnvVar: envVar(userTokenSecretFlagName),
 		},
 		cli.BoolFlag{
-			Name: "no-color",
+			Name: noColorFlagName,
 		},
 	}
 	app.Before = func(c *cli.Context) error {

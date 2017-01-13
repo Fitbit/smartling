@@ -16,7 +16,7 @@ import (
 )
 
 func injectDiContainerAction(c *cli.Context) error {
-	filename, err := filepath.Abs(c.GlobalString("project-file"))
+	filename, err := filepath.Abs(c.GlobalString(projectFileFlagName))
 
 	if err == nil {
 		var container *di.Container
@@ -27,7 +27,7 @@ func injectDiContainerAction(c *cli.Context) error {
 
 		container, err = di.Setup(&opts)
 
-		c.App.Metadata[containerKey] = container
+		c.App.Metadata[containerMetadataKey] = container
 	}
 
 	return err

@@ -16,11 +16,11 @@ import (
 )
 
 func persistAuthTokenAction(c *cli.Context) (err error) {
-	if c.App.Metadata[containerKey] != nil {
-		container := c.App.Metadata[containerKey].(*di.Container)
+	if c.App.Metadata[containerMetadataKey] != nil {
+		container := c.App.Metadata[containerMetadataKey].(*di.Container)
 
-		if c.App.Metadata[authTokenKey] != nil {
-			authToken := c.App.Metadata[authTokenKey].(*model.AuthToken)
+		if c.App.Metadata[authTokenMetadataKey] != nil {
+			authToken := c.App.Metadata[authTokenMetadataKey].(*model.AuthToken)
 			projectConfig := model.ProjectConfig{
 				AuthToken: model.AuthToken{
 					AccessToken: authToken.RefreshToken,

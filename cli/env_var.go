@@ -9,8 +9,8 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package main
 
-var (
-	containerKey     = appKey("container")
-	projectConfigKey = appKey("project_config")
-	authTokenKey     = appKey("auth_token")
-)
+import "strings"
+
+func envVar(name string) string {
+	return "SMARTLING_" + strings.ToUpper(strings.Replace(name, "-", "_", -1))
+}
