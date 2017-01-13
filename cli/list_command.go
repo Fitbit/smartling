@@ -25,7 +25,7 @@ var listCommand = cli.Command{
 	Before: func(c *cli.Context) error {
 		return invokeActions([]action{
 			ensureMetadataAction,
-			injectContainerAction,
+			injectDiContainerAction,
 			injectProjectConfigAction,
 		}, c)
 	},

@@ -11,8 +11,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/Fitbit/smartling/di"
 	"github.com/Fitbit/smartling/model"
-	"github.com/Fitbit/smartling/service"
 	"github.com/fatih/color"
 	"gopkg.in/go-playground/pool.v3"
 	"gopkg.in/urfave/cli.v1"
@@ -26,7 +26,7 @@ var pushCommand = cli.Command{
 	Before: func(c *cli.Context) error {
 		return invokeActions([]action{
 			ensureMetadataAction,
-			injectContainerAction,
+			injectDiContainerAction,
 			injectProjectConfigAction,
 			validateProjectConfigAction,
 			injectAuthTokenAction,
@@ -41,7 +41,7 @@ var pushCommand = cli.Command{
 
 		batch := p.Batch()
 
-		container := c.App.Metadata[containerKey].(*service.Container)
+		container := c.App.Metadata[containerKey].(*di.Container)
 		authToken := c.App.Metadata[authTokenKey].(*model.AuthToken)
 		projectConfig := c.App.Metadata[projectConfigKey].(*model.ProjectConfig)
 

@@ -1,4 +1,4 @@
-// Copyright 2016, Fitbit, Inc.
+// Copyright 2017, Fitbit, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -7,24 +7,8 @@
 //
 // Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and limitations under the License.
-package main
+package di
 
-import (
-	"github.com/Fitbit/smartling/service"
-	"gopkg.in/urfave/cli.v1"
-	"path/filepath"
-)
-
-func injectContainerAction(c *cli.Context) error {
-	container := service.Container{}
-
-	filename, err := filepath.Abs(c.GlobalString("project-file"))
-
-	if err == nil {
-		err = container.SetUp(filename)
-	}
-
-	c.App.Metadata[containerKey] = &container
-
-	return err
+type Options struct {
+	Filename string
 }

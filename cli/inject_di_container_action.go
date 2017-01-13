@@ -11,24 +11,23 @@ package main
 
 import (
 	"github.com/Fitbit/smartling/di"
-	"github.com/Fitbit/smartling/model"
 	"gopkg.in/urfave/cli.v1"
+	"path/filepath"
 )
 
-func persistAuthTokenAction(c *cli.Context) (err error) {
-	if c.App.Metadata[containerKey] != nil {
-		container := c.App.Metadata[containerKey].(*di.Container)
+func injectDiContainerAction(c *cli.Context) error {
+	filename, err := filepath.Abs(c.GlobalString("project-file"))
 
-		if c.App.Metadata[authTokenKey] != nil {
-			authToken := c.App.Metadata[authTokenKey].(*model.AuthToken)
-			projectConfig := model.ProjectConfig{
-				AuthToken: model.AuthToken{
-					AccessToken: authToken.RefreshToken,
-				},
-			}
+	if err == nil {
+		var container *di.Container
 
-			err = container.ProjectConfigService.UpdateConfig(&projectConfig)
+		opts := di.Options{
+			Filename: filename,
 		}
+
+		container, err = di.Setup(&opts)
+
+		c.App.Metadata[containerKey] = container
 	}
 
 	return err
