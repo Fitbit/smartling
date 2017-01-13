@@ -33,6 +33,7 @@ dist:
 		basename=$$(basename $$dirname); \
 		filename=${BIN_NAME}-${VERSION}-$$basename; \
 		cp LICENSE $$dirname; \
+		cp NOTICE $$dirname; \
 		cp README.md $$dirname; \
 		pushd $$dirname &> /dev/null; \
 		tar -zcf ../$$filename.tar.gz ./; \
