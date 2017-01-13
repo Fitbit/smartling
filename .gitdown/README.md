@@ -23,7 +23,7 @@ It is designed to make the downloading/uploading process very speedy.
 ## Homebrew
 
 ```
-brew tap mdreizin/tap
+brew tap fitbit/tap
 brew install smartling
 ```
 
@@ -52,7 +52,7 @@ Then execute `smartling`:
 ## Setup
 
 * Run `brew install go glide`
-* Run `make restore`
+* Run `make deps`
 
 ## Develop
 
