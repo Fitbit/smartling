@@ -39,7 +39,6 @@ var pullCommand = cli.Command{
 	},
 	Before: func(c *cli.Context) error {
 		return invokeActions([]action{
-			ensureMetadataAction,
 			injectDiContainerAction,
 			injectProjectConfigAction,
 			validateProjectConfigAction,

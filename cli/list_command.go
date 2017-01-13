@@ -24,7 +24,6 @@ var listCommand = cli.Command{
 	Usage: "Shows a list of local translations",
 	Before: func(c *cli.Context) error {
 		return invokeActions([]action{
-			ensureMetadataAction,
 			injectDiContainerAction,
 			injectProjectConfigAction,
 		}, c)

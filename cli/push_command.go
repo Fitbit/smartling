@@ -25,7 +25,6 @@ var pushCommand = cli.Command{
 	Usage: "Uploads translations",
 	Before: func(c *cli.Context) error {
 		return invokeActions([]action{
-			ensureMetadataAction,
 			injectDiContainerAction,
 			injectProjectConfigAction,
 			validateProjectConfigAction,
