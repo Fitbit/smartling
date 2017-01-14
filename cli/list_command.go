@@ -24,13 +24,12 @@ var listCommand = cli.Command{
 	Usage: "Shows a list of local translations",
 	Before: func(c *cli.Context) error {
 		return invokeActions([]action{
-			ensureMetadataAction,
-			injectContainerAction,
+			injectDiContainerAction,
 			injectProjectConfigAction,
 		}, c)
 	},
 	Action: func(c *cli.Context) error {
-		projectConfig := c.App.Metadata[projectConfigKey].(*model.ProjectConfig)
+		projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
 		i := 0
 
 		for _, resource := range projectConfig.Resources {

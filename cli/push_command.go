@@ -11,8 +11,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/Fitbit/smartling/di"
 	"github.com/Fitbit/smartling/model"
-	"github.com/Fitbit/smartling/service"
 	"github.com/fatih/color"
 	"gopkg.in/go-playground/pool.v3"
 	"gopkg.in/urfave/cli.v1"
@@ -25,8 +25,7 @@ var pushCommand = cli.Command{
 	Usage: "Uploads translations",
 	Before: func(c *cli.Context) error {
 		return invokeActions([]action{
-			ensureMetadataAction,
-			injectContainerAction,
+			injectDiContainerAction,
 			injectProjectConfigAction,
 			validateProjectConfigAction,
 			injectAuthTokenAction,
@@ -41,9 +40,9 @@ var pushCommand = cli.Command{
 
 		batch := p.Batch()
 
-		container := c.App.Metadata[containerKey].(*service.Container)
-		authToken := c.App.Metadata[authTokenKey].(*model.AuthToken)
-		projectConfig := c.App.Metadata[projectConfigKey].(*model.ProjectConfig)
+		container := c.App.Metadata[containerMetadataKey].(*di.Container)
+		authToken := c.App.Metadata[authTokenMetadataKey].(*model.AuthToken)
+		projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
 
 		go func() {
 			for _, resource := range projectConfig.Resources {

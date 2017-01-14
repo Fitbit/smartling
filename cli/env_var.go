@@ -9,10 +9,8 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package main
 
-import "gopkg.in/urfave/cli.v1"
+import "strings"
 
-func ensureMetadataAction(c *cli.Context) error {
-	c.App.Metadata = map[string]interface{}{}
-
-	return nil
+func envVar(name string) string {
+	return "SMARTLING_" + strings.ToUpper(strings.Replace(name, "-", "_", -1))
 }

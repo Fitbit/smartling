@@ -17,7 +17,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	os.Setenv(appKey("PROJECT_FILE"), "testdata/smartling.yml")
+	os.Setenv(envVar(projectFileFlagName), "testdata/smartling.yml")
 
 	os.Exit(m.Run())
 }

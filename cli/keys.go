@@ -9,22 +9,14 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package main
 
-import (
-	"github.com/Fitbit/smartling/service"
-	"gopkg.in/urfave/cli.v1"
-	"path/filepath"
+var (
+	containerMetadataKey     = "container"
+	projectConfigMetadataKey = "project-config"
+	authTokenMetadataKey     = "auth-token"
+	projectFileFlagName      = "project-file"
+	projectIDFlagName        = "project-id"
+	projectAliasFlagName     = "project-alias"
+	userTokenIDFlagName      = "user-id"
+	userTokenSecretFlagName  = "user-secret"
+	noColorFlagName          = "no-color"
 )
-
-func injectContainerAction(c *cli.Context) error {
-	container := service.Container{}
-
-	filename, err := filepath.Abs(c.GlobalString("project-file"))
-
-	if err == nil {
-		err = container.SetUp(filename)
-	}
-
-	c.App.Metadata[containerKey] = &container
-
-	return err
-}

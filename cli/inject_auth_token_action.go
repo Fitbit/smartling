@@ -10,15 +10,15 @@
 package main
 
 import (
+	"github.com/Fitbit/smartling/di"
 	"github.com/Fitbit/smartling/model"
-	"github.com/Fitbit/smartling/service"
 	"gopkg.in/urfave/cli.v1"
 )
 
 func injectAuthTokenAction(c *cli.Context) (err error) {
 	authToken := &model.AuthToken{}
-	container := c.App.Metadata[containerKey].(*service.Container)
-	projectConfig := c.App.Metadata[projectConfigKey].(*model.ProjectConfig)
+	container := c.App.Metadata[containerMetadataKey].(*di.Container)
+	projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
 
 	if projectConfig.AuthToken.AccessToken != "" {
 		if authToken, err = container.AuthService.Refresh(projectConfig.AuthToken.AccessToken); err != nil {
@@ -28,7 +28,7 @@ func injectAuthTokenAction(c *cli.Context) (err error) {
 		authToken, err = container.AuthService.Authenticate(&projectConfig.UserToken)
 	}
 
-	c.App.Metadata[authTokenKey] = authToken
+	c.App.Metadata[authTokenMetadataKey] = authToken
 
 	return err
 }

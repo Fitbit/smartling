@@ -7,15 +7,12 @@
 //
 // Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and limitations under the License.
-package main
+package di
 
-import (
-	"github.com/fatih/color"
-	"gopkg.in/urfave/cli.v1"
-)
+import "github.com/Fitbit/smartling/service"
 
-func disableColorAction(c *cli.Context) error {
-	color.NoColor = c.GlobalBool(noColorFlagName)
-
-	return nil
+type Container struct {
+	ProjectConfigService service.ProjectConfigService `inject:"DefaultProjectConfigService"`
+	AuthService          service.AuthService          `inject:"DefaultAuthService"`
+	FileService          service.FileService          `inject:"DefaultFileService"`
 }

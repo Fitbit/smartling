@@ -10,20 +10,20 @@
 package main
 
 import (
+	"github.com/Fitbit/smartling/di"
 	"github.com/Fitbit/smartling/model"
-	"github.com/Fitbit/smartling/service"
 	"gopkg.in/urfave/cli.v1"
 )
 
 func injectProjectConfigAction(c *cli.Context) error {
-	container := c.App.Metadata[containerKey].(*service.Container)
+	container := c.App.Metadata[containerMetadataKey].(*di.Container)
 	project := &model.Project{
-		ID:    c.GlobalString("project-id"),
-		Alias: c.GlobalString("project-alias"),
+		ID:    c.GlobalString(projectIDFlagName),
+		Alias: c.GlobalString(projectAliasFlagName),
 	}
 	userToken := &model.UserToken{
-		ID:     c.GlobalString("user-id"),
-		Secret: c.GlobalString("user-secret"),
+		ID:     c.GlobalString(userTokenIDFlagName),
+		Secret: c.GlobalString(userTokenSecretFlagName),
 	}
 	projectConfig, err := container.ProjectConfigService.GetConfig()
 
@@ -61,7 +61,7 @@ func injectProjectConfigAction(c *cli.Context) error {
 		}
 	}
 
-	c.App.Metadata[projectConfigKey] = projectConfig
+	c.App.Metadata[projectConfigMetadataKey] = projectConfig
 
 	return err
 }

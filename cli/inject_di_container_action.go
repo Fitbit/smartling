@@ -9,8 +9,26 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package main
 
-import "strings"
+import (
+	"github.com/Fitbit/smartling/di"
+	"gopkg.in/urfave/cli.v1"
+	"path/filepath"
+)
 
-func appKey(name string) string {
-	return "SMARTLING_" + strings.ToUpper(name)
+func injectDiContainerAction(c *cli.Context) error {
+	filename, err := filepath.Abs(c.GlobalString(projectFileFlagName))
+
+	if err == nil {
+		var container *di.Container
+
+		opts := di.Options{
+			Filename: filename,
+		}
+
+		container, err = di.Setup(&opts)
+
+		c.App.Metadata[containerMetadataKey] = container
+	}
+
+	return err
 }
