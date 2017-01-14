@@ -28,7 +28,7 @@ func TestDefaultAuthService_Authenticate(t *testing.T) {
 	}
 
 	authService := DefaultAuthService{
-		Client: rest.Client(),
+		Client: rest.Client(false),
 	}
 
 	resp, err := authService.Authenticate(&model.UserToken{
@@ -53,7 +53,7 @@ func TestDefaultAuthService_Refresh(t *testing.T) {
 	}
 
 	authService := DefaultAuthService{
-		Client: rest.Client(),
+		Client: rest.Client(false),
 	}
 
 	resp, err := authService.Refresh("refreshToken")

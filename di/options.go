@@ -11,4 +11,5 @@ package di
 
 type Options struct {
 	Filename string
+	Verbose  bool
 }

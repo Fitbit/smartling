@@ -23,6 +23,7 @@ func injectDiContainerAction(c *cli.Context) error {
 
 		opts := di.Options{
 			Filename: filename,
+			Verbose:  c.GlobalBool(verboseFlagName),
 		}
 
 		container, err = di.Setup(&opts)

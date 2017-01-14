@@ -22,4 +22,5 @@ const (
 	retrievalTypeFlagName          = "retrieval-type"
 	includeOriginalStringsFlagName = "include-original-strings"
 	fileUrisLimitFlagName          = "file-uris-limit"
+	verboseFlagName                = "verbose"
 )

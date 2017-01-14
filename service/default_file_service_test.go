@@ -23,7 +23,7 @@ func TestDefaultFileService_Push(t *testing.T) {
 	defer ts.Close()
 
 	fileService := DefaultFileService{
-		Client: rest.Client(),
+		Client: rest.Client(false),
 	}
 
 	stats, err := fileService.Push(&FilePushParams{
@@ -49,7 +49,7 @@ func TestDefaultFileService_Pull(t *testing.T) {
 	defer ts.Close()
 
 	fileService := DefaultFileService{
-		Client: rest.Client(),
+		Client: rest.Client(false),
 	}
 
 	files, err := fileService.Pull(&FilePullParams{
