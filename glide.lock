@@ -1,5 +1,5 @@
-hash: 25b4178b8725d9a78900e5a115b74ab84c8cb1be384b1b3ed94af0e54dd0c791
-updated: 2017-01-13T21:50:42.549709567+03:00
+hash: 1c1615be7e10f00cd8fcbb6643b4a4950823bc2cc1ace75bc910b957426dca39
+updated: 2017-01-14T15:41:57.478501384+03:00
 imports:
 - name: github.com/aokoli/goutils
   version: 9c37978a95bd5c709a15883b6242714ea6709e64
@@ -38,7 +38,7 @@ imports:
 - name: gopkg.in/go-playground/pool.v3
   version: e73cd3a5ded835540c5cf4778488579c5b357d68
 - name: gopkg.in/resty.v0
-  version: 0eed47a8f8c2575a34a067585dc0853d91943ac4
+  version: 2e0c2310ba20c7edb6162ea2f6c0d5bba2e5e56d
 - name: gopkg.in/urfave/cli.v1
   version: 0bdeddeeb0f650497d603c4ad7b20cfe685682f6
 - name: gopkg.in/yaml.v2

@@ -99,15 +99,9 @@ func (s *DefaultFileService) Push(params *FilePushParams) (*model.FileStats, err
 						SetResult(rest.Model{}).
 						SetError(rest.Model{}).
 						SetAuthToken(params.AuthToken).
-						SetFileReader("file", "", reader)
-
-					for p, v := range q {
-						for _, pv := range v {
-							req.FormData.Add(p, pv)
-						}
-					}
-
-					req.SetFormData(params.Directives)
+						SetFileReader("file", "", reader).
+						SetMultiValueFormData(q).
+						SetFormData(params.Directives)
 
 					if resp, err = req.Post(_url); err == nil {
 						err = rest.Result(resp, &stats)
