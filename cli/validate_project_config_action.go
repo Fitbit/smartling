@@ -10,10 +10,10 @@
 package main
 
 import (
-	"gopkg.in/urfave/cli.v1"
-	"github.com/Fitbit/smartling/model"
 	"errors"
 	"fmt"
+	"github.com/Fitbit/smartling/model"
+	"gopkg.in/urfave/cli.v1"
 )
 
 func validateProjectConfigAction(c *cli.Context) error {
