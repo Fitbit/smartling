@@ -9,14 +9,17 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package main
 
-var (
-	containerMetadataKey     = "container"
-	projectConfigMetadataKey = "project-config"
-	authTokenMetadataKey     = "auth-token"
-	projectFileFlagName      = "project-file"
-	projectIDFlagName        = "project-id"
-	projectAliasFlagName     = "project-alias"
-	userTokenIDFlagName      = "user-id"
-	userTokenSecretFlagName  = "user-secret"
-	noColorFlagName          = "no-color"
+const (
+	containerMetadataKey           = "container"
+	projectConfigMetadataKey       = "project-config"
+	authTokenMetadataKey           = "auth-token"
+	projectFileFlagName            = "project-file"
+	projectIDFlagName              = "project-id"
+	projectAliasFlagName           = "project-alias"
+	userTokenIDFlagName            = "user-id"
+	userTokenSecretFlagName        = "user-secret"
+	noColorFlagName                = "no-color"
+	retrievalTypeFlagName          = "retrieval-type"
+	includeOriginalStringsFlagName = "include-original-strings"
+	fileUrisLimitFlagName          = "file-uris-limit"
 )
