@@ -68,7 +68,7 @@ var pullCommand = cli.Command{
 
 		go func() {
 			for _, resource := range projectConfig.Resources {
-				for _, files := range resource.LimitFiles(limit) {
+				for _, files := range resource.BatchFiles(limit) {
 					batch.Queue(pullJob(&pullRequest{
 						Files:                  files,
 						Locales:                locales,

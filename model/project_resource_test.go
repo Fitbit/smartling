@@ -74,16 +74,16 @@ func TestProjectResource_Files(t *testing.T) {
 	}, r4.Files())
 }
 
-func TestProjectResource_LimitFiles(t *testing.T) {
+func TestProjectResource_BatchFiles(t *testing.T) {
 	a := assert.New(t)
 	r := ProjectResource{
 		PathGlob: "testdata/**/*.json",
 	}
 
-	f1 := r.LimitFiles(-1)
-	f2 := r.LimitFiles(1)
-	f3 := r.LimitFiles(3)
-	f4 := r.LimitFiles(4)
+	f1 := r.BatchFiles(-1)
+	f2 := r.BatchFiles(1)
+	f3 := r.BatchFiles(3)
+	f4 := r.BatchFiles(4)
 
 	a.Len(f1, 1)
 	a.Len(f1[0], 7)
