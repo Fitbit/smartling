@@ -10,9 +10,7 @@
 package main
 
 import (
-	"fmt"
 	"github.com/Fitbit/smartling/service"
-	"github.com/fatih/color"
 	"gopkg.in/go-playground/pool.v3"
 )
 
@@ -25,8 +23,6 @@ func pullJob(req *pullRequest) pool.WorkFunc {
 		uris := []string{}
 
 		for _, path := range req.Files {
-			logInfo(fmt.Sprintf("%s", color.MagentaString(path)))
-
 			uris = append(uris, req.Config.FileURI(path))
 		}
 

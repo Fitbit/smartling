@@ -7,15 +7,21 @@
 //
 // Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and limitations under the License.
-package main
+package logger
 
 import (
-	"github.com/Fitbit/smartling/logger"
-	"time"
+	"log"
+	"os"
 )
 
-func elapsedTime(startTime time.Time) {
-	endTime := time.Since(startTime)
+var cur *log.Logger
 
-	logger.Info(endTime)
+func current() *log.Logger {
+	if cur == nil {
+		cur = log.New(os.Stdout, "", 0)
+	}
+
+	cur.SetOutput(os.Stdout)
+
+	return cur
 }

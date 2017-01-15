@@ -51,7 +51,7 @@ func newApp() *cli.App {
 	}
 	app.Before = func(c *cli.Context) error {
 		return invokeActions([]action{
-			disableColorAction,
+			disableColorsAction,
 		}, c)
 	}
 	app.Commands = []cli.Command{

@@ -10,8 +10,8 @@
 package main
 
 import (
-	"fmt"
 	"github.com/Fitbit/smartling/di"
+	"github.com/Fitbit/smartling/logger"
 	"github.com/Fitbit/smartling/model"
 	"github.com/fatih/color"
 	"gopkg.in/go-playground/pool.v3"
@@ -69,6 +69,10 @@ var pullCommand = cli.Command{
 		go func() {
 			for _, resource := range projectConfig.Resources {
 				for _, files := range resource.BatchFiles(limit) {
+					for _, path := range files {
+						logger.Infof("%s", color.MagentaString(path))
+					}
+
 					batch.Queue(pullJob(&pullRequest{
 						Files:                  files,
 						Locales:                locales,
@@ -91,7 +95,7 @@ var pullCommand = cli.Command{
 			resp := result.Value().(*pullResponse)
 
 			if err := result.Error(); err != nil {
-				logError(fmt.Sprintf("[%s] has error %s", color.MagentaString(strings.Join(resp.Request.Files, " ")), color.RedString(err.Error())))
+				logger.Errorf("[%s] has error %s", color.MagentaString(strings.Join(resp.Request.Files, " ")), color.RedString(err.Error()))
 			} else {
 				for _, file := range resp.Files {
 					if !visited[file.Path] {
@@ -103,7 +107,7 @@ var pullCommand = cli.Command{
 			}
 		}
 
-		logInfo(fmt.Sprintf("%d files", len(visited)))
+		logger.Infof("%d files", len(visited))
 
 		return nil
 	},

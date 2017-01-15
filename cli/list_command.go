@@ -10,7 +10,7 @@
 package main
 
 import (
-	"fmt"
+	"github.com/Fitbit/smartling/logger"
 	"github.com/Fitbit/smartling/model"
 	"github.com/fatih/color"
 	"gopkg.in/urfave/cli.v1"
@@ -33,15 +33,15 @@ var listCommand = cli.Command{
 		i := 0
 
 		for _, resource := range projectConfig.Resources {
-			logInfo(fmt.Sprintf("Using {PathGlob=%v PathExclude=%v}", resource.PathGlob, resource.PathExclude))
+			logger.Infof("Using {PathGlob=%v PathExclude=%v}", resource.PathGlob, resource.PathExclude)
 
 			for _, v := range resource.Files() {
-				logInfo(color.MagentaString(v))
+				logger.Info(color.MagentaString(v))
 				i++
 			}
 		}
 
-		logInfo(fmt.Sprintf("%d files", i))
+		logger.Infof("%d files", i)
 
 		return nil
 	},

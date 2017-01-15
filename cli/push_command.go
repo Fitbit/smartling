@@ -10,8 +10,8 @@
 package main
 
 import (
-	"fmt"
 	"github.com/Fitbit/smartling/di"
+	"github.com/Fitbit/smartling/logger"
 	"github.com/Fitbit/smartling/model"
 	"github.com/fatih/color"
 	"gopkg.in/go-playground/pool.v3"
@@ -66,14 +66,14 @@ var pushCommand = cli.Command{
 			resp := result.Value().(*pushResponse)
 
 			if err := result.Error(); err != nil {
-				logError(fmt.Sprintf("%s has error %s", resp.Params.FilePath, color.RedString(err.Error())))
+				logger.Errorf("%s has error %s", resp.Params.FilePath, color.RedString(err.Error()))
 			} else {
-				logInfo(fmt.Sprintf("%s {Override=%t Strings=%d Words=%d}", color.MagentaString(resp.Params.FilePath), resp.Stats.OverWritten, resp.Stats.StringCount, resp.Stats.WordCount))
+				logger.Infof("%s {Override=%t Strings=%d Words=%d}", color.MagentaString(resp.Params.FilePath), resp.Stats.OverWritten, resp.Stats.StringCount, resp.Stats.WordCount)
 				i++
 			}
 		}
 
-		logInfo(fmt.Sprintf("%d files", i))
+		logger.Infof("%d files", i)
 
 		return nil
 	},
