@@ -10,7 +10,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"github.com/Fitbit/smartling/model"
 	"gopkg.in/urfave/cli.v1"
@@ -19,26 +18,24 @@ import (
 func validateProjectConfigAction(c *cli.Context) error {
 	var err error
 
-	me := cli.MultiError{
-		Errors: []error{},
-	}
+	invalidOptions := []string{}
 
 	projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
 
 	if projectConfig.Project.ID == "" {
-		me.Errors = append(me.Errors, fmt.Errorf("%s is required", projectIDFlagName))
+		invalidOptions = append(invalidOptions, projectIDFlagName)
 	}
 
 	if projectConfig.UserToken.ID == "" {
-		me.Errors = append(me.Errors, fmt.Errorf("%s is required", userTokenIDFlagName))
+		invalidOptions = append(invalidOptions, userTokenIDFlagName)
 	}
 
 	if projectConfig.UserToken.Secret == "" {
-		me.Errors = append(me.Errors, fmt.Errorf("%s is required", userTokenSecretFlagName))
+		invalidOptions = append(invalidOptions, userTokenSecretFlagName)
 	}
 
-	if len(me.Errors) > 0 {
-		err = errors.New(me.Error())
+	if len(invalidOptions) > 0 {
+		err = fmt.Errorf(`The following "GLOBAL OPTIONS" are required %v`, invalidOptions)
 	}
 
 	return err
