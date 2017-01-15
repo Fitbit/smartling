@@ -29,7 +29,3 @@ func Error(v ...interface{}) {
 func Errorf(format string, v ...interface{}) {
 	Error(fmt.Sprintf(format, v...))
 }
-
-func DisableColors(colors bool) {
-	color.NoColor = colors
-}

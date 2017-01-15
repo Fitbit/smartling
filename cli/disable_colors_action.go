@@ -10,12 +10,12 @@
 package main
 
 import (
-	"github.com/Fitbit/smartling/logger"
+	"github.com/fatih/color"
 	"gopkg.in/urfave/cli.v1"
 )
 
 func disableColorsAction(c *cli.Context) error {
-	logger.DisableColors(c.GlobalBool(noColorFlagName))
+	color.NoColor = c.GlobalBool(noColorFlagName)
 
 	return nil
 }
