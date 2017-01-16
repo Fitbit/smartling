@@ -14,7 +14,7 @@ import (
 	"github.com/Fitbit/smartling/service"
 )
 
-type pushRequest struct {
+type pushWorkerParams struct {
 	Path        string
 	Config      *model.ProjectConfig
 	Resource    *model.ProjectResource
