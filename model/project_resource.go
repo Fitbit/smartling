@@ -32,7 +32,7 @@ type ProjectResource struct {
 func (r *ProjectResource) FilePath(filename string, locale string) (string, error) {
 	funcMap := sprig.FuncMap()
 
-	t, err := template.New("PathForTemplate").Funcs(funcMap).Parse(r.PathExpression)
+	t, err := template.New("FilePathTemplate").Funcs(funcMap).Parse(r.PathExpression)
 
 	if err != nil {
 		return "", err
