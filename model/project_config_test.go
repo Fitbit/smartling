@@ -45,7 +45,7 @@ func TestProjectConfig_Merge(t *testing.T) {
 	a.EqualValues(dst, src)
 }
 
-func TestProjectConfig_LocaleFor(t *testing.T) {
+func TestProjectConfig_Locale(t *testing.T) {
 	a := assert.New(t)
 	p := ProjectConfig{
 		Locales: map[string]string{
@@ -54,9 +54,9 @@ func TestProjectConfig_LocaleFor(t *testing.T) {
 		},
 	}
 
-	a.EqualValues("en_US", p.LocaleFor("en-US"))
-	a.EqualValues("ru", p.LocaleFor("ru-RU"))
-	a.EqualValues("de-DE", p.LocaleFor("de-DE"))
+	a.EqualValues("en_US", p.Locale("en-US"))
+	a.EqualValues("ru", p.Locale("ru-RU"))
+	a.EqualValues("de-DE", p.Locale("de-DE"))
 }
 
 func TestProjectConfig_FileURI(t *testing.T) {

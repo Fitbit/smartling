@@ -31,7 +31,7 @@ func (c *ProjectConfig) Merge(delta *ProjectConfig) error {
 	return mergo.MapWithOverwrite(c, delta)
 }
 
-func (c *ProjectConfig) LocaleFor(localeID string) string {
+func (c *ProjectConfig) Locale(localeID string) string {
 	locale := c.Locales[localeID]
 
 	if locale != "" {
@@ -59,7 +59,7 @@ func (c *ProjectConfig) SaveFile(file *File, resource *ProjectResource) error {
 		filename string
 	)
 
-	locale := c.LocaleFor(file.LocaleID)
+	locale := c.Locale(file.LocaleID)
 
 	if filename, err = resource.FilePath(c.FilePath(file.Path), locale); err == nil {
 		if filename, err = filepath.Abs(filename); err == nil {
