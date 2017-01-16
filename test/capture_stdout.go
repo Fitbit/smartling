@@ -16,14 +16,14 @@ import (
 )
 
 func CaptureStdout(f func() error) (string, error) {
-	old := os.Stdout
+	tmp := os.Stdout
 	r, w, _ := os.Pipe()
 	os.Stdout = w
 
 	err := f()
 
 	w.Close()
-	os.Stdout = old
+	os.Stdout = tmp
 
 	var buf bytes.Buffer
 

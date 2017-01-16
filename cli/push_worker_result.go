@@ -9,13 +9,9 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package main
 
-import (
-	"github.com/fatih/color"
-	"gopkg.in/urfave/cli.v1"
-)
+import "github.com/Fitbit/smartling/model"
 
-func disableColorAction(c *cli.Context) error {
-	color.NoColor = c.GlobalBool(noColorFlagName)
-
-	return nil
+type pushWorkerResult struct {
+	Stats  *model.FileStats
+	Params *pushWorkerParams
 }

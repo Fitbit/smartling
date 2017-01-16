@@ -14,23 +14,23 @@ import (
 	"testing"
 )
 
-func TestProjectResource_PathFor(t *testing.T) {
+func TestProjectResource_FilePath(t *testing.T) {
 	a := assert.New(t)
 	r := ProjectResource{
 		PathExpression: `{{ .Dir }}/{{ .Locale | replace "-" "_" }}{{ .Ext }}`,
 	}
-	p, err := r.PathFor("testdata/en-US.json", "en-US")
+	p, err := r.FilePath("testdata/en-US.json", "en-US")
 
 	a.NoError(err)
 	a.EqualValues("testdata/en_US.json", p)
 }
 
-func TestProjectResource_PathFor_ThrowsError(t *testing.T) {
+func TestProjectResource_FilePath_ThrowsError(t *testing.T) {
 	a := assert.New(t)
 	r := ProjectResource{
 		PathExpression: "{{ .Test | test }}",
 	}
-	p, err := r.PathFor("testdata/en-US.json", "en-US")
+	p, err := r.FilePath("testdata/en-US.json", "en-US")
 
 	a.Error(err)
 	a.EqualValues("", p)
@@ -74,16 +74,16 @@ func TestProjectResource_Files(t *testing.T) {
 	}, r4.Files())
 }
 
-func TestProjectResource_LimitFiles(t *testing.T) {
+func TestProjectResource_BatchFiles(t *testing.T) {
 	a := assert.New(t)
 	r := ProjectResource{
 		PathGlob: "testdata/**/*.json",
 	}
 
-	f1 := r.LimitFiles(-1)
-	f2 := r.LimitFiles(1)
-	f3 := r.LimitFiles(3)
-	f4 := r.LimitFiles(4)
+	f1 := r.BatchFiles(-1)
+	f2 := r.BatchFiles(1)
+	f3 := r.BatchFiles(3)
+	f4 := r.BatchFiles(4)
 
 	a.Len(f1, 1)
 	a.Len(f1[0], 7)

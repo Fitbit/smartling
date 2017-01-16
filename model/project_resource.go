@@ -29,10 +29,10 @@ type ProjectResource struct {
 	Directives       DirectiveMap `yaml:"Directives,omitempty"`
 }
 
-func (r *ProjectResource) PathFor(filename string, locale string) (string, error) {
+func (r *ProjectResource) FilePath(filename string, locale string) (string, error) {
 	funcMap := sprig.FuncMap()
 
-	t, err := template.New("PathForTemplate").Funcs(funcMap).Parse(r.PathExpression)
+	t, err := template.New("FilePathTemplate").Funcs(funcMap).Parse(r.PathExpression)
 
 	if err != nil {
 		return "", err
@@ -97,32 +97,32 @@ func (r *ProjectResource) Files() []string {
 	return allFiles
 }
 
-func (r *ProjectResource) LimitFiles(limit int) [][]string {
-	files := r.Files()
-	pages := [][]string{}
+func (r *ProjectResource) BatchFiles(size int) [][]string {
+	allFiles := r.Files()
+	batch := [][]string{}
 
-	if limit < 0 || len(files) < limit {
-		pages = append(pages, files)
-	} else if limit > 0 {
-		p := int(math.Ceil(float64(float32(len(files)) / float32(limit))))
+	if size < 0 || len(allFiles) < size {
+		batch = append(batch, allFiles)
+	} else if size > 0 {
+		p := int(math.Ceil(float64(float32(len(allFiles)) / float32(size))))
 
 		for i := 0; i < p; i++ {
-			var page []string
+			var files []string
 
-			low := limit * i
-			high := limit * (i + 1)
+			low := size * i
+			high := size * (i + 1)
 
 			if i == 0 {
-				page = files[0:limit]
+				files = allFiles[0:size]
 			} else if i < p-1 {
-				page = files[low:high]
+				files = allFiles[low:high]
 			} else {
-				page = files[low:]
+				files = allFiles[low:]
 			}
 
-			pages = append(pages, page)
+			batch = append(batch, files)
 		}
 	}
 
-	return pages
+	return batch
 }

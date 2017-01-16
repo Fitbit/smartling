@@ -10,8 +10,8 @@
 package main
 
 import (
-	"fmt"
 	"github.com/Fitbit/smartling/di"
+	"github.com/Fitbit/smartling/logger"
 	"github.com/Fitbit/smartling/model"
 	"github.com/fatih/color"
 	"gopkg.in/go-playground/pool.v3"
@@ -26,14 +26,14 @@ var pullCommand = cli.Command{
 	Usage: "Downloads translations",
 	Flags: []cli.Flag{
 		cli.StringFlag{
-			Name:  "retrieval-type",
+			Name:  retrievalTypeFlagName,
 			Value: "published",
 		},
 		cli.BoolFlag{
-			Name: "include-original-strings",
+			Name: includeOriginalStringsFlagName,
 		},
 		cli.IntFlag{
-			Name:  "file-uris-limit",
+			Name:  fileUrisLimitFlagName,
 			Value: 20,
 		},
 	},
@@ -57,9 +57,9 @@ var pullCommand = cli.Command{
 		container := c.App.Metadata[containerMetadataKey].(*di.Container)
 		authToken := c.App.Metadata[authTokenMetadataKey].(*model.AuthToken)
 		projectConfig := c.App.Metadata[projectConfigMetadataKey].(*model.ProjectConfig)
-		retrievalType := c.String("retrieval-type")
-		includeOriginalStrings := c.Bool("include-original-strings")
-		limit := c.Int("file-uris-limit")
+		retrievalType := c.String(retrievalTypeFlagName)
+		includeOriginalStrings := c.Bool(includeOriginalStringsFlagName)
+		limit := c.Int(fileUrisLimitFlagName)
 		locales := []string{}
 
 		for locale := range projectConfig.Locales {
@@ -68,8 +68,12 @@ var pullCommand = cli.Command{
 
 		go func() {
 			for _, resource := range projectConfig.Resources {
-				for _, files := range resource.LimitFiles(limit) {
-					batch.Queue(pullJob(&pullRequest{
+				for _, files := range resource.BatchFiles(limit) {
+					for _, path := range files {
+						logger.Infof("%s", color.MagentaString(path))
+					}
+
+					batch.Queue(pullWorker(&pullWorkerParams{
 						Files:                  files,
 						Locales:                locales,
 						IncludeOriginalStrings: includeOriginalStrings,
@@ -87,23 +91,23 @@ var pullCommand = cli.Command{
 
 		visited := map[string]bool{}
 
-		for result := range batch.Results() {
-			resp := result.Value().(*pullResponse)
+		for results := range batch.Results() {
+			result := results.Value().(*pullWorkerResult)
 
-			if err := result.Error(); err != nil {
-				logError(fmt.Sprintf("[%s] has error %s", color.MagentaString(strings.Join(resp.Request.Files, " ")), color.RedString(err.Error())))
+			if err := results.Error(); err != nil {
+				logger.Errorf("[%s] has error %s", color.MagentaString(strings.Join(result.Params.Files, " ")), color.RedString(err.Error()))
 			} else {
-				for _, file := range resp.Files {
+				for _, file := range result.Files {
 					if !visited[file.Path] {
 						visited[file.Path] = true
 					}
 				}
 
-				projectConfig.SaveAllFiles(resp.Files, resp.Request.Resource)
+				projectConfig.SaveAllFiles(result.Files, result.Params.Resource)
 			}
 		}
 
-		logInfo(fmt.Sprintf("%d files", len(visited)))
+		logger.Infof("%d files", len(visited))
 
 		return nil
 	},

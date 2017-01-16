@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-const DirectivePrefix = "smartling."
+const directivePrefix = "smartling."
 
 type DirectiveMap map[string]string
 
@@ -21,8 +21,8 @@ func (d DirectiveMap) WithPrefix() map[string]string {
 	m := map[string]string{}
 
 	for key, value := range d {
-		if !strings.HasPrefix(key, DirectivePrefix) {
-			m[DirectivePrefix+key] = value
+		if !strings.HasPrefix(key, directivePrefix) {
+			m[directivePrefix+key] = value
 		} else {
 			m[key] = value
 		}

@@ -14,13 +14,10 @@ import (
 	"github.com/Fitbit/smartling/service"
 )
 
-type pullRequest struct {
-	Files                  []string
-	Locales                []string
-	IncludeOriginalStrings bool
-	RetrievalType          string
-	Config                 *model.ProjectConfig
-	Resource               *model.ProjectResource
-	AuthToken              string
-	FileService            service.FileService
+type pushWorkerParams struct {
+	Path        string
+	Config      *model.ProjectConfig
+	Resource    *model.ProjectResource
+	AuthToken   string
+	FileService service.FileService
 }

@@ -10,11 +10,12 @@
 package main
 
 import (
+	"github.com/Fitbit/smartling/logger"
 	"time"
 )
 
 func elapsedTime(startTime time.Time) {
 	endTime := time.Since(startTime)
 
-	logInfo(endTime)
+	logger.Info(endTime)
 }

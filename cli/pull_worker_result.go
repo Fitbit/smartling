@@ -9,7 +9,9 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package main
 
-const (
-	logLevelInfo  = "INFO"
-	logLevelError = "ERROR"
-)
+import "github.com/Fitbit/smartling/model"
+
+type pullWorkerResult struct {
+	Files  []*model.File
+	Params *pullWorkerParams
+}

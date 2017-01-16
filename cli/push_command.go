@@ -10,8 +10,8 @@
 package main
 
 import (
-	"fmt"
 	"github.com/Fitbit/smartling/di"
+	"github.com/Fitbit/smartling/logger"
 	"github.com/Fitbit/smartling/model"
 	"github.com/fatih/color"
 	"gopkg.in/go-playground/pool.v3"
@@ -47,7 +47,7 @@ var pushCommand = cli.Command{
 		go func() {
 			for _, resource := range projectConfig.Resources {
 				for _, path := range resource.Files() {
-					batch.Queue(pushJob(&pushRequest{
+					batch.Queue(pushWorker(&pushWorkerParams{
 						Path:        path,
 						Resource:    &resource,
 						Config:      projectConfig,
@@ -62,18 +62,18 @@ var pushCommand = cli.Command{
 
 		i := 0
 
-		for result := range batch.Results() {
-			resp := result.Value().(*pushResponse)
+		for results := range batch.Results() {
+			result := results.Value().(*pushWorkerResult)
 
-			if err := result.Error(); err != nil {
-				logError(fmt.Sprintf("%s has error %s", resp.Params.FilePath, color.RedString(err.Error())))
+			if err := results.Error(); err != nil {
+				logger.Errorf("%s has error %s", color.MagentaString(result.Params.Path), color.RedString(err.Error()))
 			} else {
-				logInfo(fmt.Sprintf("%s {Override=%t Strings=%d Words=%d}", color.MagentaString(resp.Params.FilePath), resp.Stats.OverWritten, resp.Stats.StringCount, resp.Stats.WordCount))
+				logger.Infof("%s {Override=%t Strings=%d Words=%d}", color.MagentaString(result.Params.Path), result.Stats.OverWritten, result.Stats.StringCount, result.Stats.WordCount)
 				i++
 			}
 		}
 
-		logInfo(fmt.Sprintf("%d files", i))
+		logger.Infof("%d files", i)
 
 		return nil
 	},

@@ -14,6 +14,7 @@ import (
 	"github.com/imdario/mergo"
 	"gopkg.in/go-playground/pool.v3"
 	"io/ioutil"
+	"os"
 	"path"
 	"path/filepath"
 	"strings"
@@ -31,7 +32,7 @@ func (c *ProjectConfig) Merge(delta *ProjectConfig) error {
 	return mergo.MapWithOverwrite(c, delta)
 }
 
-func (c *ProjectConfig) LocaleFor(localeID string) string {
+func (c *ProjectConfig) Locale(localeID string) string {
 	locale := c.Locales[localeID]
 
 	if locale != "" {
@@ -59,18 +60,23 @@ func (c *ProjectConfig) SaveFile(file *File, resource *ProjectResource) error {
 		filename string
 	)
 
-	locale := c.LocaleFor(file.LocaleID)
+	locale := c.Locale(file.LocaleID)
 
-	if filename, err = resource.PathFor(c.FilePath(file.Path), locale); err == nil {
+	if filename, err = resource.FilePath(c.FilePath(file.Path), locale); err == nil {
 		if filename, err = filepath.Abs(filename); err == nil {
-			err = ioutil.WriteFile(filename, file.Content, 0644)
+			dir := filepath.Dir(filename)
+
+			if err = os.MkdirAll(dir, 0777); err == nil {
+				err = ioutil.WriteFile(filename, file.Content, 0644)
+			}
 		}
 	}
 
 	return err
 }
 
-func (c *ProjectConfig) SaveAllFiles(files []*File, resource *ProjectResource) {
+func (c *ProjectConfig) SaveAllFiles(files []*File, resource *ProjectResource) map[*File]error {
+	errs := map[*File]error{}
 	p := pool.New()
 
 	defer p.Close()
@@ -79,21 +85,29 @@ func (c *ProjectConfig) SaveAllFiles(files []*File, resource *ProjectResource) {
 
 	go func() {
 		for _, file := range files {
-			batch.Queue(c.saveFileJob(file, resource))
+			batch.Queue(c.saveFileWorker(file, resource))
 		}
 
 		batch.QueueComplete()
 	}()
 
-	batch.WaitAll()
+	for results := range batch.Results() {
+		result := results.Value().(*File)
+
+		if err := results.Error(); err != nil && result != nil {
+			errs[result] = err
+		}
+	}
+
+	return errs
 }
 
-func (c *ProjectConfig) saveFileJob(file *File, resource *ProjectResource) pool.WorkFunc {
+func (c *ProjectConfig) saveFileWorker(file *File, resource *ProjectResource) pool.WorkFunc {
 	return func(wu pool.WorkUnit) (interface{}, error) {
 		if wu.IsCancelled() {
 			return nil, nil
 		}
 
-		return nil, c.SaveFile(file, resource)
+		return file, c.SaveFile(file, resource)
 	}
 }

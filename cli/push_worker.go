@@ -10,40 +10,31 @@
 package main
 
 import (
-	"fmt"
 	"github.com/Fitbit/smartling/service"
-	"github.com/fatih/color"
 	"gopkg.in/go-playground/pool.v3"
 )
 
-func pullJob(req *pullRequest) pool.WorkFunc {
+func pushWorker(params *pushWorkerParams) pool.WorkFunc {
 	return func(wu pool.WorkUnit) (interface{}, error) {
 		if wu.IsCancelled() {
 			return nil, nil
 		}
 
-		uris := []string{}
+		directives := params.Resource.Directives.WithPrefix()
 
-		for _, path := range req.Files {
-			logInfo(fmt.Sprintf("%s", color.MagentaString(path)))
+		stats, err := params.FileService.Push(&service.FilePushParams{
+			ProjectID:  params.Config.Project.ID,
+			FileURI:    params.Config.FileURI(params.Path),
+			FilePath:   params.Path,
+			FileType:   params.Resource.Type,
+			Authorize:  params.Resource.AuthorizeContent,
+			Directives: directives,
+			AuthToken:  params.AuthToken,
+		})
 
-			uris = append(uris, req.Config.FileURI(path))
-		}
-
-		params := &service.FilePullParams{
-			ProjectID:              req.Config.Project.ID,
-			FileURIs:               uris,
-			LocaleIDs:              req.Locales,
-			RetrievalType:          req.RetrievalType,
-			IncludeOriginalStrings: req.IncludeOriginalStrings,
-			AuthToken:              req.AuthToken,
-		}
-
-		files, err := req.FileService.Pull(params)
-
-		return &pullResponse{
-			Files:   files,
-			Request: req,
+		return &pushWorkerResult{
+			Stats:  stats,
+			Params: params,
 		}, err
 	}
 }

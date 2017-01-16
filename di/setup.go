@@ -44,7 +44,7 @@ func Setup(opts *Options) (*Container, error) {
 			Name:  "DefaultFileService",
 		},
 		&inject.Object{
-			Value: rest.Client(),
+			Value: rest.Client(opts.Verbose),
 			Name:  "DefaultRestClient",
 		},
 	)

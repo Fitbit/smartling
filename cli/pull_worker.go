@@ -14,28 +14,29 @@ import (
 	"gopkg.in/go-playground/pool.v3"
 )
 
-func pushJob(req *pushRequest) pool.WorkFunc {
+func pullWorker(params *pullWorkerParams) pool.WorkFunc {
 	return func(wu pool.WorkUnit) (interface{}, error) {
 		if wu.IsCancelled() {
 			return nil, nil
 		}
 
-		directives := req.Resource.Directives.WithPrefix()
+		uris := []string{}
 
-		params := &service.FilePushParams{
-			ProjectID:  req.Config.Project.ID,
-			FileURI:    req.Config.FileURI(req.Path),
-			FilePath:   req.Path,
-			FileType:   req.Resource.Type,
-			Authorize:  req.Resource.AuthorizeContent,
-			Directives: directives,
-			AuthToken:  req.AuthToken,
+		for _, path := range params.Files {
+			uris = append(uris, params.Config.FileURI(path))
 		}
 
-		stats, err := req.FileService.Push(params)
+		files, err := params.FileService.Pull(&service.FilePullParams{
+			ProjectID:              params.Config.Project.ID,
+			FileURIs:               uris,
+			LocaleIDs:              params.Locales,
+			RetrievalType:          params.RetrievalType,
+			IncludeOriginalStrings: params.IncludeOriginalStrings,
+			AuthToken:              params.AuthToken,
+		})
 
-		return &pushResponse{
-			Stats:  stats,
+		return &pullWorkerResult{
+			Files:  files,
 			Params: params,
 		}, err
 	}

@@ -117,3 +117,4 @@ bower_components/
 
 build/
 dist/
+**/testdata/tmp
