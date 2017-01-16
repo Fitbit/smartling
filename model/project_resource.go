@@ -29,7 +29,7 @@ type ProjectResource struct {
 	Directives       DirectiveMap `yaml:"Directives,omitempty"`
 }
 
-func (r *ProjectResource) PathFor(filename string, locale string) (string, error) {
+func (r *ProjectResource) FilePath(filename string, locale string) (string, error) {
 	funcMap := sprig.FuncMap()
 
 	t, err := template.New("PathForTemplate").Funcs(funcMap).Parse(r.PathExpression)

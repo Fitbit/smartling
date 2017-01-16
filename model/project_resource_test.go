@@ -14,23 +14,23 @@ import (
 	"testing"
 )
 
-func TestProjectResource_PathFor(t *testing.T) {
+func TestProjectResource_FilePath(t *testing.T) {
 	a := assert.New(t)
 	r := ProjectResource{
 		PathExpression: `{{ .Dir }}/{{ .Locale | replace "-" "_" }}{{ .Ext }}`,
 	}
-	p, err := r.PathFor("testdata/en-US.json", "en-US")
+	p, err := r.FilePath("testdata/en-US.json", "en-US")
 
 	a.NoError(err)
 	a.EqualValues("testdata/en_US.json", p)
 }
 
-func TestProjectResource_PathFor_ThrowsError(t *testing.T) {
+func TestProjectResource_FilePath_ThrowsError(t *testing.T) {
 	a := assert.New(t)
 	r := ProjectResource{
 		PathExpression: "{{ .Test | test }}",
 	}
-	p, err := r.PathFor("testdata/en-US.json", "en-US")
+	p, err := r.FilePath("testdata/en-US.json", "en-US")
 
 	a.Error(err)
 	a.EqualValues("", p)

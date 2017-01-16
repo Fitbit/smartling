@@ -61,7 +61,7 @@ func (c *ProjectConfig) SaveFile(file *File, resource *ProjectResource) error {
 
 	locale := c.LocaleFor(file.LocaleID)
 
-	if filename, err = resource.PathFor(c.FilePath(file.Path), locale); err == nil {
+	if filename, err = resource.FilePath(c.FilePath(file.Path), locale); err == nil {
 		if filename, err = filepath.Abs(filename); err == nil {
 			err = ioutil.WriteFile(filename, file.Content, 0644)
 		}
