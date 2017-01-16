@@ -14,6 +14,17 @@ import (
 	"strings"
 )
 
+func init()  {
+	cli.HelpFlag = cli.BoolFlag{
+		Name:  "help, h",
+		Usage: "Show help",
+	}
+	cli.VersionFlag = cli.BoolFlag{
+		Name:  "version, v",
+		Usage: "Output the version number",
+	}
+}
+
 func newApp() *cli.App {
 	app := cli.NewApp()
 
@@ -25,28 +36,35 @@ func newApp() *cli.App {
 			Name:   projectFileFlagName,
 			Value:  ".smartling.yml",
 			EnvVar: envVar(projectFileFlagName),
+			Usage: "Project configuration file",
 		},
 		cli.StringFlag{
 			Name:   projectIDFlagName,
 			EnvVar: envVar(projectIDFlagName),
+			Usage: "Project identifier for your Smartling v2 API Token",
 		},
 		cli.StringFlag{
 			Name:   projectAliasFlagName,
 			EnvVar: envVar(projectAliasFlagName),
+			Usage: "Unique alias of your project",
 		},
 		cli.StringFlag{
 			Name:   userTokenIDFlagName,
 			EnvVar: envVar(userTokenIDFlagName),
+			Usage: "User identifier for your Smartling v2 API Token",
 		},
 		cli.StringFlag{
 			Name:   userTokenSecretFlagName,
 			EnvVar: envVar(userTokenSecretFlagName),
+			Usage: "Token secret for your Smartling v2 API Token",
 		},
 		cli.BoolFlag{
 			Name: noColorFlagName,
+			Usage: "Turn off colored output for log messages",
 		},
 		cli.BoolFlag{
 			Name: verboseFlagName,
+			Usage: "Output verbose messages on internal operations",
 		},
 	}
 	app.Before = func(c *cli.Context) error {
