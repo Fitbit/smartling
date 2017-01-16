@@ -11,11 +11,12 @@ COMMANDS:
      help, h   Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --project-file value   (default: ".smartling.yml") [$SMARTLING_PROJECT_FILE]
-   --project-id value      [$SMARTLING_PROJECT_ID]
-   --project-alias value   [$SMARTLING_PROJECT_ALIAS]
-   --user-id value         [$SMARTLING_USER_ID]
-   --user-secret value     [$SMARTLING_USER_SECRET]
-   --no-color
-   --help, -h             show help
-   --version, -v          print the version
+   --project-file value   Project configuration file (default: ".smartling.yml") [$SMARTLING_PROJECT_FILE]
+   --project-id value     Project identifier for your Smartling v2 API Token [$SMARTLING_PROJECT_ID]
+   --project-alias value  Unique alias of your project [$SMARTLING_PROJECT_ALIAS]
+   --user-id value        User identifier for your Smartling v2 API Token [$SMARTLING_USER_ID]
+   --user-secret value    Token secret for your Smartling v2 API Token [$SMARTLING_USER_SECRET]
+   --no-color             Turn off colored output for log messages
+   --verbose              Output verbose messages on internal operations
+   --help, -h             Show help
+   --version, -v          Output the version number

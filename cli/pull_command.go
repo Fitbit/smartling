@@ -28,13 +28,16 @@ var pullCommand = cli.Command{
 		cli.StringFlag{
 			Name:  retrievalTypeFlagName,
 			Value: "published",
+			Usage: "Determines the desired format for the download (pending, published, pseudo, contextMatchingInstrumented)",
 		},
 		cli.BoolFlag{
 			Name: includeOriginalStringsFlagName,
+			Usage: "Specifies whether Smartling will return the original string or an empty string where no translation is available",
 		},
 		cli.IntFlag{
 			Name:  fileUrisLimitFlagName,
 			Value: 20,
+			Usage: "Due to limitation of length of query string it helps to set how many files can be downloaded per one request",
 		},
 	},
 	Before: func(c *cli.Context) error {
