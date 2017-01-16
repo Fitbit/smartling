@@ -58,7 +58,7 @@ func (s *DefaultFileService) Pull(params *FilePullParams) ([]*model.File, error)
 				go func(params *FilePullParams) {
 					if reader, err = zip.NewReader(bytes.NewReader(body), int64(len(body))); err == nil {
 						for _, file := range reader.File {
-							batch.Queue(s.extractFileJob(file, params.LocaleIDs))
+							batch.Queue(s.extractFileWorker(file, params.LocaleIDs))
 						}
 					}
 
@@ -141,7 +141,7 @@ func (s *DefaultFileService) extractFile(zf *zip.File, locales []string) (*model
 	return file, err
 }
 
-func (s *DefaultFileService) extractFileJob(zf *zip.File, locales []string) pool.WorkFunc {
+func (s *DefaultFileService) extractFileWorker(zf *zip.File, locales []string) pool.WorkFunc {
 	return func(wu pool.WorkUnit) (interface{}, error) {
 		if wu.IsCancelled() {
 			return nil, nil
