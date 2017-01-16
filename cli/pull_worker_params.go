@@ -14,7 +14,7 @@ import (
 	"github.com/Fitbit/smartling/service"
 )
 
-type pullRequest struct {
+type pullWorkerParams struct {
 	Files                  []string
 	Locales                []string
 	IncludeOriginalStrings bool

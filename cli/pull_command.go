@@ -73,7 +73,7 @@ var pullCommand = cli.Command{
 						logger.Infof("%s", color.MagentaString(path))
 					}
 
-					batch.Queue(pullJob(&pullRequest{
+					batch.Queue(pullWorker(&pullWorkerParams{
 						Files:                  files,
 						Locales:                locales,
 						IncludeOriginalStrings: includeOriginalStrings,
@@ -91,19 +91,19 @@ var pullCommand = cli.Command{
 
 		visited := map[string]bool{}
 
-		for result := range batch.Results() {
-			resp := result.Value().(*pullResponse)
+		for results := range batch.Results() {
+			result := results.Value().(*pullWorkerResult)
 
-			if err := result.Error(); err != nil {
-				logger.Errorf("[%s] has error %s", color.MagentaString(strings.Join(resp.Request.Files, " ")), color.RedString(err.Error()))
+			if err := results.Error(); err != nil {
+				logger.Errorf("[%s] has error %s", color.MagentaString(strings.Join(result.Params.Files, " ")), color.RedString(err.Error()))
 			} else {
-				for _, file := range resp.Files {
+				for _, file := range result.Files {
 					if !visited[file.Path] {
 						visited[file.Path] = true
 					}
 				}
 
-				projectConfig.SaveAllFiles(resp.Files, resp.Request.Resource)
+				projectConfig.SaveAllFiles(result.Files, result.Params.Resource)
 			}
 		}
 

@@ -14,7 +14,7 @@ import (
 	"gopkg.in/go-playground/pool.v3"
 )
 
-func pullJob(req *pullRequest) pool.WorkFunc {
+func pullWorker(params *pullWorkerParams) pool.WorkFunc {
 	return func(wu pool.WorkUnit) (interface{}, error) {
 		if wu.IsCancelled() {
 			return nil, nil
@@ -22,24 +22,22 @@ func pullJob(req *pullRequest) pool.WorkFunc {
 
 		uris := []string{}
 
-		for _, path := range req.Files {
-			uris = append(uris, req.Config.FileURI(path))
+		for _, path := range params.Files {
+			uris = append(uris, params.Config.FileURI(path))
 		}
 
-		params := &service.FilePullParams{
-			ProjectID:              req.Config.Project.ID,
+		files, err := params.FileService.Pull(&service.FilePullParams{
+			ProjectID:              params.Config.Project.ID,
 			FileURIs:               uris,
-			LocaleIDs:              req.Locales,
-			RetrievalType:          req.RetrievalType,
-			IncludeOriginalStrings: req.IncludeOriginalStrings,
-			AuthToken:              req.AuthToken,
-		}
+			LocaleIDs:              params.Locales,
+			RetrievalType:          params.RetrievalType,
+			IncludeOriginalStrings: params.IncludeOriginalStrings,
+			AuthToken:              params.AuthToken,
+		})
 
-		files, err := req.FileService.Pull(params)
-
-		return &pullResponse{
-			Files:   files,
-			Request: req,
+		return &pullWorkerResult{
+			Files:  files,
+			Params: params,
 		}, err
 	}
 }

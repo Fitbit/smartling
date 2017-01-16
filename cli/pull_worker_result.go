@@ -9,13 +9,9 @@
 // See the License for the specific language governing permissions and limitations under the License.
 package main
 
-import (
-	"github.com/Fitbit/smartling/model"
-	"github.com/Fitbit/smartling/service"
-)
+import "github.com/Fitbit/smartling/model"
 
-type pullResponse struct {
-	Files   []*model.File
-	Request *pullRequest
-	Params  *service.FilePullParams
+type pullWorkerResult struct {
+	Files  []*model.File
+	Params *pullWorkerParams
 }
