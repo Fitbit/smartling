@@ -79,7 +79,7 @@ func (c *ProjectConfig) SaveAllFiles(files []*File, resource *ProjectResource) {
 
 	go func() {
 		for _, file := range files {
-			batch.Queue(c.saveFileJob(file, resource))
+			batch.Queue(c.saveFileWorker(file, resource))
 		}
 
 		batch.QueueComplete()
@@ -88,7 +88,7 @@ func (c *ProjectConfig) SaveAllFiles(files []*File, resource *ProjectResource) {
 	batch.WaitAll()
 }
 
-func (c *ProjectConfig) saveFileJob(file *File, resource *ProjectResource) pool.WorkFunc {
+func (c *ProjectConfig) saveFileWorker(file *File, resource *ProjectResource) pool.WorkFunc {
 	return func(wu pool.WorkUnit) (interface{}, error) {
 		if wu.IsCancelled() {
 			return nil, nil
