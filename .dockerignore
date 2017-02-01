@@ -1,0 +1,6 @@
+.*/
+node_modules/
+vendor/
+Makefile
+package.json
+README.md
