@@ -3,9 +3,10 @@ PACKAGES:=$$(go list ./... | grep -v /vendor/)
 ifdef TRAVIS_TAG
 	VERSION=$(TRAVIS_TAG)
 else
-	VERSION=dev
+	VERSION=latest
 endif
 GOBUILD_ARGS:=-ldflags "-X main.Version=$(VERSION)"
+ORG_NAME:=fitbit
 BIN_NAME:=smartling
 BUILD_DIR:=build
 COVER_DIR:=coverage
@@ -82,3 +83,6 @@ coveralls:
 
 readme:
 	@npm run gitdown
+
+docker:
+	docker build --force-rm -t ${ORG_NAME}/${BIN_NAME}:${VERSION} --build-arg VERSION=${VERSION} .
