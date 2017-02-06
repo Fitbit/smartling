@@ -1,7 +1,6 @@
 [![Travis build status](http://img.shields.io/travis/Fitbit/smartling/master.svg?style=flat-square)](https://travis-ci.org/Fitbit/smartling)
 [![Coverage Status](https://img.shields.io/coveralls/Fitbit/smartling/master.svg?style=flat-square)](https://coveralls.io/r/Fitbit/smartling?branch=master)
 
-<a name="smartling"></a>
 # smartling
 > CLI to work with Smartling translations
 
@@ -9,21 +8,18 @@ CLI tool provides simple unix-style command line interface to work with Smartlin
 
 It is designed to make the downloading/uploading process very speedy.
 
-<a name="smartling-features"></a>
 ## Features
 
 - [x] Highly configurable via `.smartling.yml`
 - [x] Designed to speedy upload/download (heavy) translations
 - [x] Supports Smartling's API v2
 
-<a name="smartling-commands"></a>
 ## Commands
 
 - [x] `push` - Uploads translations
 - [x] `pull` - Downloads translations
 - [x] `list` - Shows a list of local translations
 
-<a name="smartling-homebrew"></a>
 ## Homebrew
 
 ```
@@ -31,12 +27,10 @@ brew tap fitbit/tap
 brew install smartling
 ```
 
-<a name="smartling-download"></a>
 ## Download
 
 All available releases you can find [here](https://github.com/Fitbit/smartling/releases).
 
-<a name="smartling-usage"></a>
 ## Usage
 
 Please define `.smartling.yml` under your repo:
@@ -103,7 +97,6 @@ Locales:
   tr-TR: tr-TR
   zh-CN: zh-CN
   zh-TW: zh-TW
-
 ```
 
 Then execute `smartling`:
@@ -133,26 +126,21 @@ GLOBAL OPTIONS:
    --verbose              Output verbose messages on internal operations
    --help, -h             Show help
    --version, -v          Output the version number
-
 ```
 
-<a name="smartling-setup"></a>
 ## Setup
 
 * Run `brew install go glide`
 * Run `make deps`
 
-<a name="smartling-develop"></a>
 ## Develop
 
 * Run `make build` and execute `smartling`
 
-<a name="smartling-test"></a>
 ## Test
 
 * Run `make test`
 
-<a name="smartling-cover"></a>
 ## Cover
 
 * Run `make cover` or `make cover-html`
