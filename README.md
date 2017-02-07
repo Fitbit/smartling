@@ -1,5 +1,5 @@
-[![Travis build status](http://img.shields.io/travis/Fitbit/smartling/master.svg?style=flat-square)](https://travis-ci.org/Fitbit/smartling)
-[![Coverage Status](https://img.shields.io/coveralls/Fitbit/smartling/master.svg?style=flat-square)](https://coveralls.io/r/Fitbit/smartling?branch=master)
+[![Travis build status](http://img.shields.io/travis/Fitbit/smartling/master.svg)](https://travis-ci.org/Fitbit/smartling)
+[![Coverage Status](https://img.shields.io/coveralls/Fitbit/smartling/master.svg)](https://coveralls.io/r/Fitbit/smartling?branch=master)
 
 # smartling
 > CLI to work with Smartling translations
