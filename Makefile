@@ -1,9 +1,9 @@
 SHELL:=/bin/bash
 PACKAGES:=$$(go list ./... | grep -v /vendor/)
 ifdef TRAVIS_TAG
-	VERSION=$(TRAVIS_TAG)
+VERSION=$(TRAVIS_TAG)
 else
-	VERSION=latest
+VERSION=latest
 endif
 GOBUILD_ARGS:=-ldflags "-X main.Version=$(VERSION)"
 ORG_NAME:=fitbit
@@ -15,8 +15,7 @@ COVER_DIR:=coverage
 
 clean:
 	@go clean $(PACKAGES)
-	@- rm -rf ${COVER_DIR}
-	@- rm -rf ${BUILD_DIR}
+	@- rm -rf ${COVER_DIR} ${BUILD_DIR}
 
 build:
 	@go build -o $$GOPATH/bin/$(BIN_NAME) ./cli/...;
@@ -29,7 +28,7 @@ build-all:
 	-osarch="!darwin/arm64" \
 	-output="${BUILD_DIR}/{{.OS}}-{{.Arch}}/${BIN_NAME}" ./cli/...
 
-dist:
+pack-all:
 	@for dirname in $$(find ${BUILD_DIR} -mindepth 1 -maxdepth 1 -type d); do \
 		basename=$$(basename $$dirname); \
 		filename=${BIN_NAME}-${VERSION}-$$basename; \
