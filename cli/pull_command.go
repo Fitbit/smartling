@@ -31,7 +31,7 @@ var pullCommand = cli.Command{
 			Usage: "Determines the desired format for the download (pending, published, pseudo, contextMatchingInstrumented)",
 		},
 		cli.BoolFlag{
-			Name: includeOriginalStringsFlagName,
+			Name:  includeOriginalStringsFlagName,
 			Usage: "Specifies whether Smartling will return the original string or an empty string where no translation is available",
 		},
 		cli.IntFlag{

@@ -23,4 +23,5 @@ const (
 	includeOriginalStringsFlagName = "include-original-strings"
 	fileUrisLimitFlagName          = "file-uris-limit"
 	verboseFlagName                = "verbose"
+	saveAccessTokenFlagName        = "save-access-token"
 )

@@ -16,7 +16,7 @@ import (
 )
 
 func persistAuthTokenAction(c *cli.Context) (err error) {
-	if c.App.Metadata[containerMetadataKey] != nil {
+	if c.GlobalBool(saveAccessTokenFlagName) && c.App.Metadata[containerMetadataKey] != nil {
 		container := c.App.Metadata[containerMetadataKey].(*di.Container)
 
 		if c.App.Metadata[authTokenMetadataKey] != nil {
