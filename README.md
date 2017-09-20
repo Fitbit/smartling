@@ -53,7 +53,7 @@ Files:
 - # The Smartling API "fileType".
   # Possible values: "javaProperties", "ios", "android", "json" etc.
   # Please see documentation which types are supported:
-  # http://docs.smartling.com/pages/supported-file-types
+  # https://help.smartling.com/docs/supported-file-types
   Type: json
   # "glob" expression defining which project files to upload to Smartling:
   # https://github.com/mattn/go-zglob
@@ -78,7 +78,7 @@ Files:
   AuthorizeContent: true
   # File directives can be used to alter the way how Smartling handles your files.
   # Please see documentation which directives are available:
-  # https://docs.smartling.com/pages/supported-file-types
+  # https://help.smartling.com/docs/supported-file-types
   Directives:
     # <directive name>: <directive value>
     string_format: NONE
