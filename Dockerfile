@@ -1,4 +1,4 @@
-FROM golang:1.7-alpine
+FROM golang:1.9-alpine
 ARG VERSION
 ENV APP_DIR "$GOPATH/src/github.com/Fitbit/smartling"
 WORKDIR $APP_DIR
