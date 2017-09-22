@@ -5,12 +5,12 @@ else
 VERSION=latest
 endif
 GOBUILD_ARGS:=-ldflags "-X main.Version=$(VERSION)"
-ORG_NAME:=Fitbit
 BIN_NAME:=smartling
 BUILD_DIR:=build
 COVER_DIR:=coverage
+DOCKER_TAG:=fitbit/${BIN_NAME}
 
-.PHONY: clean build build-all pack-all fmt deps lint test bench cover cover-html coveralls readme
+.PHONY: clean build build-all pack-all fmt deps lint test bench cover cover-html coveralls docker
 
 clean:
 	@go clean ./...
@@ -78,4 +78,4 @@ coveralls:
 	@goveralls -coverprofile=${COVER_DIR}/profile.cov -service=travis-ci
 
 docker:
-	docker build --force-rm -t ${ORG_NAME}/${BIN_NAME}:${VERSION} --build-arg VERSION=${VERSION} .
+	docker build --force-rm -t ${DOCKER_TAG}:${VERSION} --build-arg VERSION=${VERSION} .
