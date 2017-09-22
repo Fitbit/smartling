@@ -1,24 +1,23 @@
 SHELL:=/bin/bash
-PACKAGES:=$$(go list ./... | grep -v /vendor/)
 ifdef TRAVIS_TAG
 VERSION=$(TRAVIS_TAG)
 else
 VERSION=latest
 endif
 GOBUILD_ARGS:=-ldflags "-X main.Version=$(VERSION)"
-ORG_NAME:=fitbit
+ORG_NAME:=Fitbit
 BIN_NAME:=smartling
 BUILD_DIR:=build
 COVER_DIR:=coverage
 
-.PHONY: clean build build-all dist fmt deps lint test bench cover cover-html coveralls readme
+.PHONY: clean build build-all pack-all fmt deps lint test bench cover cover-html coveralls readme
 
 clean:
-	@go clean $(PACKAGES)
+	@go clean ./...
 	@- rm -rf ${COVER_DIR} ${BUILD_DIR}
 
 build:
-	@go build -o $$GOPATH/bin/$(BIN_NAME) ./cli/...;
+	@go build -o $$GOPATH/bin/$(BIN_NAME) ./cli/...
 
 build-all:
 	gox \
@@ -42,7 +41,7 @@ pack-all:
 	done
 
 fmt:
-	@go fmt $(PACKAGES)
+	@go fmt ./...
 
 deps:
 	@go get -u -v github.com/axw/gocov/gocov
@@ -54,34 +53,29 @@ deps:
 	@glide install
 
 lint:
-	@for pkg in $(PACKAGES); do \
-		go tool vet $$(basename $$pkg); \
-		golint $$(basename $$pkg); \
-	done
+	@go vet ./...
+	@golint $(go list ./...)
 
 test:
-	@go test -v $(PACKAGES)
+	@go test -v ./...
 
 bench:
-	@go test $(PACKAGES) -bench . -benchtime 2s -benchmem
+	@go test ./... -bench . -benchtime 2s -benchmem
 
 cover:
-	@gocov test $(PACKAGES) | gocov report
+	@gocov test ./... | gocov report
 
 cover-html:
-	@- mkdir -p coverage
-	@gocov test $(PACKAGES) | gocov-html > ${COVER_DIR}/profile.html
+	@- mkdir -p ${COVER_DIR}
+	@gocov test $$(go list ./...) | gocov-html > ${COVER_DIR}/profile.html
 
 coveralls:
-	@- mkdir -p coverage
-	@for pkg in $(PACKAGES); do \
+	@- mkdir -p ${COVER_DIR}
+	@for pkg in $$(go list ./...); do \
 		go test $$pkg -coverprofile="${COVER_DIR}/$$(basename $$pkg)-profile.cov"; \
 	done
 	@gocovmerge ${COVER_DIR}/*-profile.cov > ${COVER_DIR}/profile.cov
-	@goveralls -coverprofile=${COVER_DIR}/profile.cov -service=travis-ci
-
-readme:
-	@npm run gitdown
+#	@goveralls -coverprofile=${COVER_DIR}/profile.cov -service=travis-ci
 
 docker:
 	docker build --force-rm -t ${ORG_NAME}/${BIN_NAME}:${VERSION} --build-arg VERSION=${VERSION} .
