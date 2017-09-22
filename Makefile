@@ -75,7 +75,7 @@ coveralls:
 		go test $$pkg -coverprofile="${COVER_DIR}/$$(basename $$pkg)-profile.cov"; \
 	done
 	@gocovmerge ${COVER_DIR}/*-profile.cov > ${COVER_DIR}/profile.cov
-#	@goveralls -coverprofile=${COVER_DIR}/profile.cov -service=travis-ci
+	@goveralls -coverprofile=${COVER_DIR}/profile.cov -service=travis-ci
 
 docker:
 	docker build --force-rm -t ${ORG_NAME}/${BIN_NAME}:${VERSION} --build-arg VERSION=${VERSION} .
