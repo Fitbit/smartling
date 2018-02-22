@@ -50,7 +50,7 @@ deps:
 	@go get -u -v github.com/mattn/goveralls
 	@go get -u -v github.com/golang/lint/golint
 	@go get -u -v github.com/mitchellh/gox
-	@glide install
+	@dep ensure
 
 lint:
 	@go vet $(PACKAGES)
