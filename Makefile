@@ -1,4 +1,4 @@
-SHELL:=/bin/bash
+PACKAGES = $$(go list ./... | grep -v /vendor/)
 ifdef TRAVIS_TAG
 VERSION=$(TRAVIS_TAG)
 else
@@ -41,7 +41,7 @@ pack-all:
 	done
 
 fmt:
-	@go fmt ./...
+	@go fmt $(PACKAGES)
 
 deps:
 	@go get -u -v github.com/axw/gocov/gocov
@@ -53,28 +53,25 @@ deps:
 	@glide install
 
 lint:
-	@go vet ./...
-	@golint $(go list ./...)
+	@go vet $(PACKAGES)
+	@golint $(PACKAGES)
 
 test:
-	@go test -v ./...
+	@go test -v $(PACKAGES)
 
 bench:
-	@go test ./... -bench . -benchtime 2s -benchmem
+	@go test $(PACKAGES) -bench . -benchtime 2s -benchmem
 
 cover:
-	@gocov test ./... | gocov report
+	@gocov test $(PACKAGES) | gocov report
 
 cover-html:
 	@- mkdir -p ${COVER_DIR}
-	@gocov test $$(go list ./...) | gocov-html > ${COVER_DIR}/profile.html
+	@gocov test $(PACKAGES) | gocov-html > ${COVER_DIR}/profile.html
 
 coveralls:
 	@- mkdir -p ${COVER_DIR}
-	@for pkg in $$(go list ./...); do \
-		go test $$pkg -coverprofile="${COVER_DIR}/$$(basename $$pkg)-profile.cov"; \
-	done
-	@gocovmerge ${COVER_DIR}/*-profile.cov > ${COVER_DIR}/profile.cov
+	@go test $(PACKAGES) -coverprofile="${COVER_DIR}/profile.cov"
 	@goveralls -coverprofile=${COVER_DIR}/profile.cov -service=travis-ci
 
 docker:
