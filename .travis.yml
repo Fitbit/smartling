@@ -1,6 +1,6 @@
 language: go
 sudo: false
-go: 1.9
+go: "1.10"
 os: linux
 notifications:
   email: false
@@ -40,14 +40,18 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+cache:
+  directories:
+    - $GOPATH/pkg/dep
+env:
+  - DEP_VERSION=0.4.1
 before_install:
-  - go get -u -v github.com/Masterminds/glide
-  - glide --version
+  - curl -L -s https://github.com/golang/dep/releases/download/v${DEP_VERSION}/dep-linux-amd64 -o $GOPATH/bin/dep
+  - chmod +x $GOPATH/bin/dep
 install:
   - make deps
 script:
   - make clean
   - make lint
   - make coveralls
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ -n "$TRAVIS_TAG" ]; then make build-all; fi'
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ -n "$TRAVIS_TAG" ]; then make pack-all; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ -n "$TRAVIS_TAG" ]; then make build-all pack-all; fi'
