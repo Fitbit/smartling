@@ -1,6 +1,6 @@
 [![Travis build status](https://img.shields.io/travis/Fitbit/smartling/master.svg)](https://travis-ci.org/Fitbit/smartling)
-[![Code Climate](https://img.shields.io/codeclimate/maintainability/Fitbit/smartling.svg)](https://codeclimate.com/github/Fitbit/smartling)
-[![Code Climate](https://img.shields.io/codeclimate/coverage/Fitbit/smartling.svg)](https://codeclimate.com/github/Fitbit/smartling)
+[![Code Climate GPA](https://img.shields.io/codeclimate/maintainability/Fitbit/smartling.svg)](https://codeclimate.com/github/Fitbit/smartling)
+[![Code Climate Coverage](https://img.shields.io/codeclimate/coverage/Fitbit/smartling.svg)](https://codeclimate.com/github/Fitbit/smartling)
 
 # smartling
 
