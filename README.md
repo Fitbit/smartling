@@ -1,7 +1,9 @@
-[![Travis build status](http://img.shields.io/travis/Fitbit/smartling/master.svg)](https://travis-ci.org/Fitbit/smartling)
-[![Coverage Status](https://img.shields.io/coveralls/Fitbit/smartling/master.svg)](https://coveralls.io/r/Fitbit/smartling?branch=master)
+[![Travis build status](https://img.shields.io/travis/Fitbit/smartling/master.svg)](https://travis-ci.org/Fitbit/smartling)
+[![Code Climate](https://img.shields.io/codeclimate/maintainability/Fitbit/smartling.svg)](https://codeclimate.com/github/Fitbit/smartling)
+[![Code Climate](https://img.shields.io/codeclimate/coverage/Fitbit/smartling.svg)](https://codeclimate.com/github/Fitbit/smartling)
 
 # smartling
+
 > CLI to work with Smartling translations
 
 CLI tool provides simple unix-style command line interface to work with Smartling translations.
@@ -103,7 +105,7 @@ Then execute `smartling`:
 
 `$ smartling`
 
-```
+```text
 NAME:
    smartling - CLI to work with Smartling translations
 
@@ -130,17 +132,17 @@ GLOBAL OPTIONS:
 
 ## Setup
 
-* Run `brew install go glide`
-* Run `make deps`
+- Run `brew install go glide`
+- Run `make deps`
 
 ## Develop
 
-* Run `make build` and execute `smartling`
+- Run `make build` and execute `smartling`
 
 ## Test
 
-* Run `make test`
+- Run `make test`
 
 ## Cover
 
-* Run `make cover` or `make cover-html`
+- Run `make cover` or `make cover-html`

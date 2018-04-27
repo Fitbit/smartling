@@ -10,7 +10,7 @@ BUILD_DIR:=build
 COVER_DIR:=coverage
 DOCKER_TAG:=fitbit/${BIN_NAME}
 
-.PHONY: clean build build-all pack-all fmt deps lint test bench cover cover-html coveralls docker
+.PHONY: clean build build-all pack-all fmt deps lint test bench cover cover-html docker
 
 clean:
 	@go clean ./...
@@ -44,10 +44,6 @@ fmt:
 	@go fmt $(PACKAGES)
 
 deps:
-	@go get -u -v github.com/axw/gocov/gocov
-	@go get -u -v github.com/matm/gocov-html
-	@go get -u -v github.com/wadey/gocovmerge
-	@go get -u -v github.com/mattn/goveralls
 	@go get -u -v github.com/golang/lint/golint
 	@go get -u -v github.com/mitchellh/gox
 	@dep ensure
@@ -63,16 +59,11 @@ bench:
 	@go test $(PACKAGES) -bench . -benchtime 2s -benchmem
 
 cover:
-	@gocov test $(PACKAGES) | gocov report
+	@- rm -rf c.out
+	@go test $(PACKAGES) -coverprofile=c.out
 
 cover-html:
-	@- mkdir -p ${COVER_DIR}
-	@gocov test $(PACKAGES) | gocov-html > ${COVER_DIR}/profile.html
-
-coveralls:
-	@- mkdir -p ${COVER_DIR}
-	@go test $(PACKAGES) -coverprofile="${COVER_DIR}/profile.cov"
-	@goveralls -coverprofile=${COVER_DIR}/profile.cov -service=travis-ci
+	@cover && go tool cover -html=c.out
 
 docker:
 	docker build --force-rm -t ${DOCKER_TAG}:${VERSION} --build-arg VERSION=${VERSION} .
