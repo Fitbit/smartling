@@ -44,7 +44,7 @@ fmt:
 	@go fmt $(PACKAGES)
 
 deps:
-	@go get -u -v github.com/golang/lint/golint
+	@go get -u -v golang.org/x/lint/golint
 	@go get -u -v github.com/mitchellh/gox
 	@dep ensure
 
