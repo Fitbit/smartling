@@ -2,113 +2,690 @@
 
 
 [[projects]]
+  digest = "1:9f3b30d9f8e0d7040f729b82dcbc8f0dead820a133b3147ce355fc451f32d761"
+  name = "github.com/BurntSushi/toml"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005"
+  version = "v0.3.1"
+
+[[projects]]
+  digest = "1:58dcf4ba52b692f16bf7f442aaebcc6b1e62c4c6aa65fccfdff6de896e893acf"
+  name = "github.com/Fitbit/smartling"
+  packages = [
+    "di",
+    "logger",
+    "model",
+    "repository",
+    "rest",
+    "service",
+    "test",
+  ]
+  pruneopts = "UT"
+  revision = "53d076a8bfff2e919ada33126d8ce98f3fd34996"
+  version = "v0.6.0"
+
+[[projects]]
+  digest = "1:1175e5a94f8557f1a3fb4a2a69b267eb679bb17d1ba8aa076a341dba320a7934"
   name = "github.com/Masterminds/sprig"
   packages = ["."]
+  pruneopts = "UT"
   revision = "89eb6984259918bffe1ddff9647b9ed06061e688"
   version = "2.5.0"
 
 [[projects]]
+  digest = "1:10bb36acbe3beb4e529f2711e02c66335adc17dffaceb1d6ceca9554c2d8baa0"
   name = "github.com/aokoli/goutils"
   packages = ["."]
+  pruneopts = "UT"
   revision = "9c37978a95bd5c709a15883b6242714ea6709e64"
 
 [[projects]]
+  digest = "1:620bade21ddf8256869717861431d52650c7e40bc56bdcd3d5ec3da63e7573b0"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
+  pruneopts = "UT"
   revision = "5215b55f46b2b919f50a1df0eaa5886afe4e3b3d"
 
 [[projects]]
+  digest = "1:d82da120bfcb93e6e5a314101e1e3903dc21b2935deb549070c4a0fe941ac398"
   name = "github.com/facebookgo/inject"
   packages = ["."]
+  pruneopts = "UT"
   revision = "643b7206b487b04fbea325cf6e8d06a66f8db772"
 
 [[projects]]
   branch = "master"
+  digest = "1:ebaa56dda9c50929b1ade8dc5388e1d0f7861c6e3af78459ac560212310feb25"
   name = "github.com/facebookgo/structtag"
   packages = ["."]
+  pruneopts = "UT"
   revision = "217e25fb96916cc60332e399c9aa63f5c422ceed"
 
 [[projects]]
+  digest = "1:460c38ec774b5010a63760d6a415cf0f35f4460288a1648fb65ef7a3cc2d832c"
   name = "github.com/fatih/color"
   packages = ["."]
+  pruneopts = "UT"
   revision = "87d4004f2ab62d0d255e0a38f1680aa534549fe3"
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:c529e3003a7747e3b3411d80a89c5898d1d568f122e260a1546e1d92deb64574"
+  name = "github.com/google/go-cmp"
+  packages = [
+    "cmp",
+    "cmp/internal/diff",
+    "cmp/internal/flags",
+    "cmp/internal/function",
+    "cmp/internal/value",
+  ]
+  pruneopts = "UT"
+  revision = "d103655696d8ae43c4125ee61454dbf03d8e8324"
+  version = "v0.5.6"
+
+[[projects]]
+  digest = "1:0462ed1f3f429a22f99e78a717262e7a02bf9c9b212ea2d66664532a8d73b406"
   name = "github.com/google/go-querystring"
   packages = ["query"]
+  pruneopts = "UT"
   revision = "9235644dd9e52eeae6fa48efd539fdc351a0af53"
 
 [[projects]]
+  digest = "1:1a6a3a22fd7bbfece37ec1d2777bdacb5282b782f5afd38ff8969d99fd3b0903"
+  name = "github.com/google/safehtml"
+  packages = [
+    ".",
+    "internal/raw",
+    "internal/safehtmlutil",
+    "internal/template/raw",
+    "template",
+    "uncheckedconversions",
+  ]
+  pruneopts = "UT"
+  revision = "84376441970934a68e39214e319511a596b8d015"
+  version = "v0.0.2"
+
+[[projects]]
+  digest = "1:a5dc460cb1cd051efa4e77ca86911a219e28808c6ab029c8237129038d9eb373"
+  name = "github.com/hashicorp/go-version"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "c2de2312d363381e4254abec260c6df2b1226483"
+  version = "v1.3.0"
+
+[[projects]]
+  digest = "1:ee0f3214956a6e5a4866c97c902ee2ec784f2f5827934bc71a5f20b026029007"
   name = "github.com/imdario/mergo"
   packages = ["."]
+  pruneopts = "UT"
   revision = "50d4dbd4eb0e84778abe37cefef140271d96fade"
 
 [[projects]]
+  digest = "1:50374b732cbc25f00df22677b39ee4ab97b95a210110ab49e85dfe63d85b7d11"
+  name = "github.com/jba/templatecheck"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "3f94d0a0b461d71f275d62477f7b0818ef78c84a"
+  version = "v0.6.0"
+
+[[projects]]
+  digest = "1:40b0620b5937e7c59e8a3be9ca8fdd37a3aba2d8c6267eb82ee65028dba9f80f"
   name = "github.com/mattn/go-colorable"
   packages = ["."]
+  pruneopts = "UT"
   revision = "ed8eb9e318d7a84ce5915b495b7d35e0cfe7b5a8"
   version = "v0.0.6"
 
 [[projects]]
+  digest = "1:3dce9780102fd9dfd8b864b18b84b1f94868f992d455af69a4604fae5d3b24f1"
   name = "github.com/mattn/go-isatty"
   packages = ["."]
+  pruneopts = "UT"
   revision = "66b8e73f3f5cda9f96b69efd03dd3d7fc4a5cdb8"
 
 [[projects]]
+  digest = "1:96132945cefda25a0d06977fe3372ccf6cfd1125a768731d53eee1a5ea5c9c57"
   name = "github.com/mattn/go-zglob"
   packages = ["."]
+  pruneopts = "UT"
   revision = "2dbd7f37a45e993d5180a251b4bdd314d6333b70"
 
 [[projects]]
+  digest = "1:05b88b3e999037a6f95fa9edc8234b3a12a1c9d12aaa93e0515c0a9aa76b9c10"
+  name = "github.com/mitchellh/iochan"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "b6e3aadd28864e14dae41ff5c7261455b1242d24"
+  version = "v1.0.0"
+
+[[projects]]
+  digest = "1:08413c4235cad94a96c39e1e2f697789733c4a87d1fdf06b412d2cf2ba49826a"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
+  pruneopts = "UT"
   revision = "d8ed2627bdf02c080bf22230dbb337003b7aba2d"
 
 [[projects]]
+  digest = "1:2bca2c6d0beabaebf210755dbfbf64e24379e4648b0cc5a917a145070d1dab2a"
+  name = "github.com/sanity-io/litter"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "b2cf0ea023a3a7aeb71789deee90fa85182a1510"
+  version = "v1.5.1"
+
+[[projects]]
+  digest = "1:9cf758470baf9d9879986f548b6ef1cf9ffd8db5cfb0ffa2606fc78a884bdec9"
+  name = "github.com/sergi/go-diff"
+  packages = ["diffmatchpatch"]
+  pruneopts = "UT"
+  revision = "0a651d56613f9de4bed8b9c4769b776ef168bfca"
+  version = "v1.2.0"
+
+[[projects]]
+  digest = "1:9b48da692639f7c24b62448bd7da83b2290b0aae36a781c945c86d05a238d283"
   name = "github.com/stretchr/testify"
   packages = ["assert"]
+  pruneopts = "UT"
   revision = "d77da356e56a7428ad25149ca77381849a6a5232"
 
 [[projects]]
+  digest = "1:5254ef4f61488e25435e54b8e4d22672b984edc0166845fb5c3a5e24cddb9e8b"
+  name = "github.com/yuin/goldmark"
+  packages = [
+    ".",
+    "ast",
+    "parser",
+    "renderer",
+    "renderer/html",
+    "text",
+    "util",
+  ]
+  pruneopts = "UT"
+  revision = "040b478cdb5f98f90f093d7e5cbe7bd82368dcfd"
+  version = "v1.3.8"
+
+[[projects]]
+  digest = "1:67acffa59b7c6aecfbb190ffbd0d974f5fa1def706a23891c54fc31b4c08a9ff"
+  name = "golang.org/x/mod"
+  packages = [
+    "internal/lazyregexp",
+    "modfile",
+    "module",
+    "semver",
+  ]
+  pruneopts = "UT"
+  revision = "d6ab96f2441f9631f81862375ef66782fc4a9c12"
+  version = "v0.4.2"
+
+[[projects]]
+  digest = "1:fd183063272c9bf8c18c64cad638649b712b8083ffb0eda1a6e06daf1f58716e"
   name = "golang.org/x/net"
   packages = [
     "idna",
-    "publicsuffix"
+    "publicsuffix",
+    "websocket",
   ]
+  pruneopts = "UT"
   revision = "6250b412798208e6c90b03b7c4f226de5aa299e2"
 
 [[projects]]
-  name = "golang.org/x/sys"
-  packages = ["unix"]
-  revision = "a646d33e2ee3172a661fc09bca23bb4889a41bc8"
+  branch = "master"
+  digest = "1:b521f10a2d8fa85c04a8ef4e62f2d1e14d303599a55d64dabf9f5a02f84d35eb"
+  name = "golang.org/x/sync"
+  packages = ["errgroup"]
+  pruneopts = "UT"
+  revision = "036812b2e83c0ddf193dd5a34e034151da389d09"
 
 [[projects]]
+  branch = "master"
+  digest = "1:b9b8ecbaef4353530667f0fab15c313d08cb6c79a0f9af352f77bd590c422cdb"
+  name = "golang.org/x/sys"
+  packages = [
+    "execabs",
+    "internal/unsafeheader",
+    "unix",
+  ]
+  pruneopts = "UT"
+  revision = "59db8d763f22395595c26ee1cae0886b57141b3a"
+
+[[projects]]
+  digest = "1:b36a75458de4be149cbb6d330206ec5b46007beee30023c39fd5cb206c42be9b"
+  name = "golang.org/x/text"
+  packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
+    "internal/gen",
+    "internal/language",
+    "internal/language/compact",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "transform",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
+  ]
+  pruneopts = "UT"
+  revision = "e328d63cff14134669501e0e154e4f141c784322"
+  version = "v0.3.6"
+
+[[projects]]
+  branch = "master"
+  digest = "1:ea64c0f6b3eeb8992d9980fb8005025d99f96c6757ef0cb0f8399fac57350482"
+  name = "golang.org/x/tools"
+  packages = [
+    "cover",
+    "go/analysis",
+    "go/analysis/analysistest",
+    "go/analysis/internal/analysisflags",
+    "go/analysis/internal/checker",
+    "go/analysis/internal/facts",
+    "go/analysis/multichecker",
+    "go/analysis/passes/asmdecl",
+    "go/analysis/passes/assign",
+    "go/analysis/passes/atomic",
+    "go/analysis/passes/atomicalign",
+    "go/analysis/passes/bools",
+    "go/analysis/passes/buildssa",
+    "go/analysis/passes/buildtag",
+    "go/analysis/passes/cgocall",
+    "go/analysis/passes/composite",
+    "go/analysis/passes/copylock",
+    "go/analysis/passes/ctrlflow",
+    "go/analysis/passes/deepequalerrors",
+    "go/analysis/passes/errorsas",
+    "go/analysis/passes/fieldalignment",
+    "go/analysis/passes/findcall",
+    "go/analysis/passes/framepointer",
+    "go/analysis/passes/httpresponse",
+    "go/analysis/passes/ifaceassert",
+    "go/analysis/passes/inspect",
+    "go/analysis/passes/internal/analysisutil",
+    "go/analysis/passes/loopclosure",
+    "go/analysis/passes/lostcancel",
+    "go/analysis/passes/nilfunc",
+    "go/analysis/passes/nilness",
+    "go/analysis/passes/pkgfact",
+    "go/analysis/passes/printf",
+    "go/analysis/passes/reflectvaluecompare",
+    "go/analysis/passes/shadow",
+    "go/analysis/passes/shift",
+    "go/analysis/passes/sigchanyzer",
+    "go/analysis/passes/sortslice",
+    "go/analysis/passes/stdmethods",
+    "go/analysis/passes/stringintconv",
+    "go/analysis/passes/structtag",
+    "go/analysis/passes/testinggoroutine",
+    "go/analysis/passes/tests",
+    "go/analysis/passes/unmarshal",
+    "go/analysis/passes/unreachable",
+    "go/analysis/passes/unsafeptr",
+    "go/analysis/passes/unusedresult",
+    "go/analysis/passes/unusedwrite",
+    "go/analysis/singlechecker",
+    "go/analysis/unitchecker",
+    "go/ast/astutil",
+    "go/ast/inspector",
+    "go/buildutil",
+    "go/callgraph",
+    "go/callgraph/cha",
+    "go/cfg",
+    "go/expect",
+    "go/gccgoexportdata",
+    "go/gcexportdata",
+    "go/internal/cgo",
+    "go/internal/gccgoimporter",
+    "go/internal/gcimporter",
+    "go/internal/packagesdriver",
+    "go/loader",
+    "go/packages",
+    "go/packages/packagestest",
+    "go/ssa",
+    "go/ssa/ssautil",
+    "go/types/objectpath",
+    "go/types/typeutil",
+    "godoc/static",
+    "gopls/internal/hooks",
+    "internal/analysisinternal",
+    "internal/event",
+    "internal/event/core",
+    "internal/event/export",
+    "internal/event/export/eventtest",
+    "internal/event/export/metric",
+    "internal/event/export/ocagent",
+    "internal/event/export/ocagent/wire",
+    "internal/event/export/prometheus",
+    "internal/event/keys",
+    "internal/event/label",
+    "internal/fakenet",
+    "internal/fastwalk",
+    "internal/gocommand",
+    "internal/gopathwalk",
+    "internal/imports",
+    "internal/jsonrpc2",
+    "internal/jsonrpc2/servertest",
+    "internal/jsonrpc2_v2",
+    "internal/lsp",
+    "internal/lsp/analysis/fillreturns",
+    "internal/lsp/analysis/fillstruct",
+    "internal/lsp/analysis/nonewvars",
+    "internal/lsp/analysis/noresultvalues",
+    "internal/lsp/analysis/simplifycompositelit",
+    "internal/lsp/analysis/simplifyrange",
+    "internal/lsp/analysis/simplifyslice",
+    "internal/lsp/analysis/undeclaredname",
+    "internal/lsp/analysis/unusedparams",
+    "internal/lsp/browser",
+    "internal/lsp/cache",
+    "internal/lsp/cmd",
+    "internal/lsp/cmd/test",
+    "internal/lsp/command",
+    "internal/lsp/command/commandmeta",
+    "internal/lsp/command/gen",
+    "internal/lsp/debug",
+    "internal/lsp/debug/log",
+    "internal/lsp/debug/tag",
+    "internal/lsp/diff",
+    "internal/lsp/diff/difftest",
+    "internal/lsp/diff/myers",
+    "internal/lsp/fake",
+    "internal/lsp/fuzzy",
+    "internal/lsp/lsprpc",
+    "internal/lsp/mod",
+    "internal/lsp/progress",
+    "internal/lsp/protocol",
+    "internal/lsp/regtest",
+    "internal/lsp/snippet",
+    "internal/lsp/source",
+    "internal/lsp/source/completion",
+    "internal/lsp/template",
+    "internal/lsp/tests",
+    "internal/memoize",
+    "internal/packagesinternal",
+    "internal/proxydir",
+    "internal/span",
+    "internal/stack",
+    "internal/stack/stacktest",
+    "internal/testenv",
+    "internal/tool",
+    "internal/typeparams",
+    "internal/typesinternal",
+    "internal/xcontext",
+    "playground",
+    "playground/socket",
+    "present",
+    "refactor/importgraph",
+    "refactor/rename",
+    "refactor/satisfy",
+    "txtar",
+  ]
+  pruneopts = "UT"
+  revision = "d25f9066828099517056ecb554d8d0b84f026ddd"
+
+[[projects]]
+  branch = "master"
+  digest = "1:918a46e4a2fb83df33f668f5a6bd51b2996775d073fce1800d3ec01b0a5ddd2b"
+  name = "golang.org/x/xerrors"
+  packages = [
+    ".",
+    "internal",
+  ]
+  pruneopts = "UT"
+  revision = "5ec99f83aff198f5fbd629d6c8d8eb38a04218ca"
+
+[[projects]]
+  digest = "1:b699eb24813add6abe916da7d11a93ae2a4122dc9bfa103fee775cb435d3dc9b"
   name = "gopkg.in/go-playground/pool.v3"
   packages = ["."]
+  pruneopts = "UT"
   revision = "e73cd3a5ded835540c5cf4778488579c5b357d68"
   version = "v3.1.1"
 
 [[projects]]
+  digest = "1:fc802427be7eeceff706d526578e4ef4588520bda794ea32523983dc13e94b78"
   name = "gopkg.in/resty.v0"
   packages = ["."]
+  pruneopts = "UT"
   revision = "2e0c2310ba20c7edb6162ea2f6c0d5bba2e5e56d"
   version = "v0.10"
 
 [[projects]]
+  digest = "1:01d3c3dfb7ef9da24cd00cbd5b9e2c147fa7a3f44a83028bc737da9cac7ed60b"
   name = "gopkg.in/urfave/cli.v1"
   packages = ["."]
+  pruneopts = "UT"
   revision = "0bdeddeeb0f650497d603c4ad7b20cfe685682f6"
   version = "v1.19.1"
 
 [[projects]]
+  digest = "1:0166e1dc8ff3d10aad40dacccf8ea76b491425169a12339e9848e688845eaa4e"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
+  pruneopts = "UT"
   revision = "e4d366fc3c7938e2958e662b4258c7a89e1f0e3e"
+
+[[projects]]
+  digest = "1:3c393f7f73381d2e1f0bd6e4b77b82ba17a100b604f90dd8d8f455ffcfab3ea2"
+  name = "honnef.co/go/tools"
+  packages = [
+    "analysis/code",
+    "analysis/edit",
+    "analysis/facts",
+    "analysis/facts/nilness",
+    "analysis/facts/typedness",
+    "analysis/lint",
+    "analysis/report",
+    "config",
+    "go/ast/astutil",
+    "go/ir",
+    "go/ir/irutil",
+    "go/types/typeutil",
+    "internal/passes/buildir",
+    "internal/sharedcheck",
+    "knowledge",
+    "pattern",
+    "printf",
+    "quickfix",
+    "simple",
+    "staticcheck",
+    "stylecheck",
+  ]
+  pruneopts = "UT"
+  revision = "434f5f3816b358fe468fa83dcba62d794e7fe04b"
+  version = "2021.1"
+
+[[projects]]
+  digest = "1:6ad51734ca3499b588b226f005d888765ef4dafc1e13c2b0180383928cb230fa"
+  name = "mvdan.cc/gofumpt"
+  packages = ["format"]
+  pruneopts = "UT"
+  revision = "667a24092cf8f76a50e7206ae566339e59508f3a"
+  version = "v0.1.1"
+
+[[projects]]
+  digest = "1:cf0e2cf5d075dcc1f9a73be596ac90d406f9e807427aa57785d6fdd730ef7952"
+  name = "mvdan.cc/xurls/v2"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "1707d8b9d1bb348e31acf8dd2a60bdfb85517125"
+  version = "v2.2.0"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "821d39c39f2a28bacc17606a1fbf43a4e2cc2d54c6a20863382d2b1a6489a7f6"
+  input-imports = [
+    "github.com/Fitbit/smartling/di",
+    "github.com/Fitbit/smartling/logger",
+    "github.com/Fitbit/smartling/model",
+    "github.com/Fitbit/smartling/repository",
+    "github.com/Fitbit/smartling/rest",
+    "github.com/Fitbit/smartling/service",
+    "github.com/Fitbit/smartling/test",
+    "github.com/Masterminds/sprig",
+    "github.com/facebookgo/inject",
+    "github.com/fatih/color",
+    "github.com/google/go-cmp/cmp",
+    "github.com/google/go-querystring/query",
+    "github.com/hashicorp/go-version",
+    "github.com/imdario/mergo",
+    "github.com/jba/templatecheck",
+    "github.com/mattn/go-zglob",
+    "github.com/mitchellh/iochan",
+    "github.com/sanity-io/litter",
+    "github.com/stretchr/testify/assert",
+    "golang.org/x/mod/modfile",
+    "golang.org/x/mod/module",
+    "golang.org/x/mod/semver",
+    "golang.org/x/sync/errgroup",
+    "golang.org/x/sys/execabs",
+    "golang.org/x/tools/cover",
+    "golang.org/x/tools/go/analysis",
+    "golang.org/x/tools/go/analysis/analysistest",
+    "golang.org/x/tools/go/analysis/internal/analysisflags",
+    "golang.org/x/tools/go/analysis/internal/checker",
+    "golang.org/x/tools/go/analysis/internal/facts",
+    "golang.org/x/tools/go/analysis/multichecker",
+    "golang.org/x/tools/go/analysis/passes/asmdecl",
+    "golang.org/x/tools/go/analysis/passes/assign",
+    "golang.org/x/tools/go/analysis/passes/atomic",
+    "golang.org/x/tools/go/analysis/passes/atomicalign",
+    "golang.org/x/tools/go/analysis/passes/bools",
+    "golang.org/x/tools/go/analysis/passes/buildssa",
+    "golang.org/x/tools/go/analysis/passes/buildtag",
+    "golang.org/x/tools/go/analysis/passes/cgocall",
+    "golang.org/x/tools/go/analysis/passes/composite",
+    "golang.org/x/tools/go/analysis/passes/copylock",
+    "golang.org/x/tools/go/analysis/passes/ctrlflow",
+    "golang.org/x/tools/go/analysis/passes/deepequalerrors",
+    "golang.org/x/tools/go/analysis/passes/errorsas",
+    "golang.org/x/tools/go/analysis/passes/fieldalignment",
+    "golang.org/x/tools/go/analysis/passes/findcall",
+    "golang.org/x/tools/go/analysis/passes/framepointer",
+    "golang.org/x/tools/go/analysis/passes/httpresponse",
+    "golang.org/x/tools/go/analysis/passes/ifaceassert",
+    "golang.org/x/tools/go/analysis/passes/inspect",
+    "golang.org/x/tools/go/analysis/passes/internal/analysisutil",
+    "golang.org/x/tools/go/analysis/passes/loopclosure",
+    "golang.org/x/tools/go/analysis/passes/lostcancel",
+    "golang.org/x/tools/go/analysis/passes/nilfunc",
+    "golang.org/x/tools/go/analysis/passes/nilness",
+    "golang.org/x/tools/go/analysis/passes/pkgfact",
+    "golang.org/x/tools/go/analysis/passes/printf",
+    "golang.org/x/tools/go/analysis/passes/reflectvaluecompare",
+    "golang.org/x/tools/go/analysis/passes/shadow",
+    "golang.org/x/tools/go/analysis/passes/shift",
+    "golang.org/x/tools/go/analysis/passes/sigchanyzer",
+    "golang.org/x/tools/go/analysis/passes/sortslice",
+    "golang.org/x/tools/go/analysis/passes/stdmethods",
+    "golang.org/x/tools/go/analysis/passes/stringintconv",
+    "golang.org/x/tools/go/analysis/passes/structtag",
+    "golang.org/x/tools/go/analysis/passes/testinggoroutine",
+    "golang.org/x/tools/go/analysis/passes/tests",
+    "golang.org/x/tools/go/analysis/passes/unmarshal",
+    "golang.org/x/tools/go/analysis/passes/unreachable",
+    "golang.org/x/tools/go/analysis/passes/unsafeptr",
+    "golang.org/x/tools/go/analysis/passes/unusedresult",
+    "golang.org/x/tools/go/analysis/passes/unusedwrite",
+    "golang.org/x/tools/go/analysis/singlechecker",
+    "golang.org/x/tools/go/analysis/unitchecker",
+    "golang.org/x/tools/go/ast/astutil",
+    "golang.org/x/tools/go/ast/inspector",
+    "golang.org/x/tools/go/buildutil",
+    "golang.org/x/tools/go/callgraph",
+    "golang.org/x/tools/go/callgraph/cha",
+    "golang.org/x/tools/go/cfg",
+    "golang.org/x/tools/go/expect",
+    "golang.org/x/tools/go/gccgoexportdata",
+    "golang.org/x/tools/go/gcexportdata",
+    "golang.org/x/tools/go/internal/cgo",
+    "golang.org/x/tools/go/internal/gccgoimporter",
+    "golang.org/x/tools/go/loader",
+    "golang.org/x/tools/go/packages",
+    "golang.org/x/tools/go/packages/packagestest",
+    "golang.org/x/tools/go/ssa",
+    "golang.org/x/tools/go/ssa/ssautil",
+    "golang.org/x/tools/go/types/objectpath",
+    "golang.org/x/tools/go/types/typeutil",
+    "golang.org/x/tools/godoc/static",
+    "golang.org/x/tools/gopls/internal/hooks",
+    "golang.org/x/tools/internal/analysisinternal",
+    "golang.org/x/tools/internal/event",
+    "golang.org/x/tools/internal/event/core",
+    "golang.org/x/tools/internal/event/export",
+    "golang.org/x/tools/internal/event/export/eventtest",
+    "golang.org/x/tools/internal/event/export/metric",
+    "golang.org/x/tools/internal/event/export/ocagent",
+    "golang.org/x/tools/internal/event/export/ocagent/wire",
+    "golang.org/x/tools/internal/event/export/prometheus",
+    "golang.org/x/tools/internal/event/keys",
+    "golang.org/x/tools/internal/event/label",
+    "golang.org/x/tools/internal/fakenet",
+    "golang.org/x/tools/internal/fastwalk",
+    "golang.org/x/tools/internal/gocommand",
+    "golang.org/x/tools/internal/gopathwalk",
+    "golang.org/x/tools/internal/imports",
+    "golang.org/x/tools/internal/jsonrpc2",
+    "golang.org/x/tools/internal/jsonrpc2/servertest",
+    "golang.org/x/tools/internal/jsonrpc2_v2",
+    "golang.org/x/tools/internal/lsp",
+    "golang.org/x/tools/internal/lsp/analysis/fillreturns",
+    "golang.org/x/tools/internal/lsp/analysis/fillstruct",
+    "golang.org/x/tools/internal/lsp/analysis/nonewvars",
+    "golang.org/x/tools/internal/lsp/analysis/noresultvalues",
+    "golang.org/x/tools/internal/lsp/analysis/simplifycompositelit",
+    "golang.org/x/tools/internal/lsp/analysis/simplifyrange",
+    "golang.org/x/tools/internal/lsp/analysis/simplifyslice",
+    "golang.org/x/tools/internal/lsp/analysis/undeclaredname",
+    "golang.org/x/tools/internal/lsp/analysis/unusedparams",
+    "golang.org/x/tools/internal/lsp/browser",
+    "golang.org/x/tools/internal/lsp/cache",
+    "golang.org/x/tools/internal/lsp/cmd",
+    "golang.org/x/tools/internal/lsp/cmd/test",
+    "golang.org/x/tools/internal/lsp/command",
+    "golang.org/x/tools/internal/lsp/command/commandmeta",
+    "golang.org/x/tools/internal/lsp/command/gen",
+    "golang.org/x/tools/internal/lsp/debug",
+    "golang.org/x/tools/internal/lsp/debug/log",
+    "golang.org/x/tools/internal/lsp/debug/tag",
+    "golang.org/x/tools/internal/lsp/diff",
+    "golang.org/x/tools/internal/lsp/diff/difftest",
+    "golang.org/x/tools/internal/lsp/diff/myers",
+    "golang.org/x/tools/internal/lsp/fake",
+    "golang.org/x/tools/internal/lsp/fuzzy",
+    "golang.org/x/tools/internal/lsp/lsprpc",
+    "golang.org/x/tools/internal/lsp/mod",
+    "golang.org/x/tools/internal/lsp/progress",
+    "golang.org/x/tools/internal/lsp/protocol",
+    "golang.org/x/tools/internal/lsp/regtest",
+    "golang.org/x/tools/internal/lsp/snippet",
+    "golang.org/x/tools/internal/lsp/source",
+    "golang.org/x/tools/internal/lsp/source/completion",
+    "golang.org/x/tools/internal/lsp/template",
+    "golang.org/x/tools/internal/lsp/tests",
+    "golang.org/x/tools/internal/memoize",
+    "golang.org/x/tools/internal/packagesinternal",
+    "golang.org/x/tools/internal/proxydir",
+    "golang.org/x/tools/internal/span",
+    "golang.org/x/tools/internal/stack",
+    "golang.org/x/tools/internal/stack/stacktest",
+    "golang.org/x/tools/internal/testenv",
+    "golang.org/x/tools/internal/tool",
+    "golang.org/x/tools/internal/typesinternal",
+    "golang.org/x/tools/internal/xcontext",
+    "golang.org/x/tools/playground",
+    "golang.org/x/tools/playground/socket",
+    "golang.org/x/tools/present",
+    "golang.org/x/tools/refactor/rename",
+    "golang.org/x/tools/refactor/satisfy",
+    "golang.org/x/tools/txtar",
+    "golang.org/x/xerrors",
+    "gopkg.in/go-playground/pool.v3",
+    "gopkg.in/resty.v0",
+    "gopkg.in/urfave/cli.v1",
+    "gopkg.in/yaml.v2",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
